@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "currentVersion": "1.0",
+  "releases": [
+    {
+      "version": "1.0",
+      "releaseType": "feature",
+      "releaseTypeLabel": "Minor feature add",
+      "filename": "frontend - Only Secure in FS Sharepoint-current.html",
+      "hash": "6e7490f1618106ee638123006f819567b250f8a756332b3104f41652393d0f37",
+      "shipTarget": "sharepoint",
+      "shippedAt": "2026-11-04T17:34:07.619Z"
+    }
+  ]
+}

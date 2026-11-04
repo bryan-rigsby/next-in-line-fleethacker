@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "currentVersion": "1.1",
+  "releases": [
+    {
+      "version": "1.0",
+      "releaseType": "feature",
+      "releaseTypeLabel": "Minor feature add",
+      "filename": "connection-test - Only Secure in FS Sharepoint v1.0.html",
+      "hash": "af0c578b26bf2aab87595e3907311dd2f78f537a45ce87fc21e66ff166a95f83",
+      "shipTarget": "sharepoint",
+      "shippedAt": "2026-11-04T17:57:00.626Z"
+    },
+    {
+      "version": "1.1",
+      "releaseType": "feature",
+      "releaseTypeLabel": "Minor feature add",
+      "filename": "connection-test - Only Secure in FS Sharepoint-current.html",
+      "hash": "7a36cc185ce77aad5725b112ba844d9fa63ef76e3b64fc9847cee6975ed5283e",
+      "shipTarget": "sharepoint",
+      "shippedAt": "2026-11-04T18:08:18.622Z"
+    }
+  ]
+}

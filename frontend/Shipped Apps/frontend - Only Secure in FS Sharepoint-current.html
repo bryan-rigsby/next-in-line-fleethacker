@@ -1,7 +1,8 @@
+<!--WFC-MANIFEST:eyJ2ZXJzaW9uIjoxLCJwcm9qZWN0IjoiZnJvbnRlbmQiLCJnZW5lcmF0ZWQiOiIyMDI2LTExLTA0VDE3OjMzOjEyLjU1MloiLCJpbmRleCI6ImluZGV4Lmh0bWwiLCJmaWxlcyI6W10sInNoaXBwaW5nIjp7InNjaGVtYSI6MSwiY29tcGlsZXJTaGEyNTYiOiI4NDAzODVlNzcyMGU4YTE1NGU3ZGYyZjRjZjI4MGNmMjc5YzJkYWI2ZTJkYzQ4NDU2MGIzZGNlMDAyMWFkZjA0IiwidGFyZ2V0Ijoic2hhcmVwb2ludCIsIm1vZGUiOiJzaGlwcGVkIiwic2VjdXJpdHlIZWFkZXJzIjpmYWxzZSwicGF5bG9hZFNoYTI1NiI6IjgwNzQ2NTJkOTk4YjljZDIzYmRiMjg5ODU0ZGU4NDBlNzBmMzhjNTkxYTMyZjE2MTY1YmQ5NWJhZTVjOGY4ZjciLCJyZWNvcmRTaGEyNTYiOiJkZTYyNjc0YjYwYmMyYWQzOWY0ZDE5ZDAzMGFkNmM2NWEwNDk3MmQ4YmM3MWIwNTBjMDY1NmEzNjU4YzcwYjBmIn19-->
 <!doctype html>
 <html lang="en">
-<head>
-    <script src="devconsole.js"></script>
+<head><meta name="app-version" content="1.0">
+<!-- <script src="devconsole.js"></script> -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NRC Houston | Flank Speed Virtual Queue & Customer Service</title>
@@ -616,62 +617,6 @@
       font-size: 0.82rem;
     }
 
-    .ss-action-item.featured-service-resource {
-      background: #eff6ff;
-      border: 2px solid var(--navy-accent);
-    }
-
-    .leave-queue-confirm-zone {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-subtle-leave {
-      background: transparent;
-      border: 1px dashed #cbd5e1;
-      color: #64748b;
-      padding: 5px 10px;
-      font-size: 0.74rem;
-    }
-
-    .btn-subtle-leave:hover {
-      border-color: var(--danger);
-      color: var(--danger);
-      background: #fff5f5;
-    }
-
-    .staff-service-editor-item {
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 10px;
-      margin-bottom: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .staff-service-editor-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .staff-service-editor-link-row {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr auto;
-      gap: 6px;
-      align-items: center;
-    }
-
-    @media (max-width: 640px) {
-      .staff-service-editor-link-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
     /* Live Ticket Status Screen */
     .ticket-pass {
       border: 2px solid var(--navy-primary);
@@ -703,52 +648,6 @@
       color: var(--navy-primary);
       letter-spacing: 0.04em;
       margin: 6px 0;
-    }
-
-    .ticket-sailor-prominent {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--navy-primary);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      margin: 8px 0 6px;
-      border: 2px solid var(--gold-primary);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .ticket-sailor-prominent .rank-tag {
-      background-color: var(--gold-primary);
-      color: var(--navy-dark);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-weight: 900;
-      font-size: 1.05rem;
-    }
-
-    .tv-sailor-name {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-top: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .tv-sailor-name .tv-rank-badge {
-      background-color: rgba(234, 179, 8, 0.25);
-      border: 1px solid var(--gold-primary);
-      color: var(--gold-primary);
-      padding: 1px 8px;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
     }
 
     .ticket-call-banner {
@@ -807,16 +706,13 @@
     }
 
     .qr-svg-wrap {
-      width: 200px;
-      height: 200px;
+      width: 170px;
+      height: 170px;
       margin: 12px auto;
       padding: 10px;
       background: white;
       border: 2px solid var(--navy-dark);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     /* VIEW 2: DEPARTMENT STAFF CONSOLE */
@@ -1226,17 +1122,6 @@
   </style>
 </head>
 <body>
-<!-- WCT-UNSHIPPED-BANNER:START -->
-<div id="wct-unshipped-banner" style="background:linear-gradient(90deg,#c0392b,#e74c3c);color:#fff;padding:5px 12px;font-family:system-ui,-apple-system,sans-serif;font-weight:bold;font-size:12px;line-height:1.2;position:fixed;top:0;left:0;right:0;z-index:999999;box-shadow:0 1px 4px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;gap:12px;min-height:34px;box-sizing:border-box;">
-  <span>&#9888;&#65039; Not Secured &ndash; Ship in Forge before entering CUI/sensitive data</span>
-  <span style="display:inline-flex;gap:6px;flex:none;">
-    <button type="button" id="wct-devconsole-button" title="Open Dev Console" style="border:1px solid rgba(255,255,255,.7);border-radius:4px;background:#20252b;color:#fff;padding:3px 8px;font:700 11px/1.2 system-ui,-apple-system,sans-serif;cursor:pointer;">Dev Console</button>
-    <button type="button" id="wct-testrecorder-button" title="Open Test Recorder" style="border:1px solid rgba(255,255,255,.7);border-radius:4px;background:#20252b;color:#fff;padding:3px 8px;font:700 11px/1.2 system-ui,-apple-system,sans-serif;cursor:pointer;">Test Recorder</button>
-  </span>
-</div>
-<style id="wct-unshipped-banner-style">body { padding-top: 38px !important; } @keyframes wct-devconsole-error-flash { 0%,100% { background:#20252b; box-shadow:none; } 25%,75% { background:#ffd43b; color:#1a1a1a; box-shadow:0 0 0 4px rgba(255,212,59,.45); } } #wct-devconsole-button.wct-devconsole-error-flash { animation:wct-devconsole-error-flash .6s ease-in-out 5; }</style>
-<!-- WCT-UNSHIPPED-BANNER:END -->
-
 
   <!-- Top Security & Environment Banner -->
   <div class="gov-banner">
@@ -1352,13 +1237,6 @@
                   Many <strong id="ss-service-name"></strong> requests can be resolved immediately without waiting in line:
                 </p>
                 <div class="self-service-actions">
-                  <div class="ss-action-item featured-service-resource" id="ss-specific-resource-row" style="display:none;">
-                    <div>
-                      <strong>🔗 <span id="ss-specific-resource-title">Service Resource Link</span></strong>
-                      <div style="font-size:0.74rem; color:var(--navy-secondary); word-break:break-all;" id="ss-specific-resource-url"></div>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-sm" id="btn-ss-open-resource">Open Resource</button>
-                  </div>
                   <div class="ss-action-item">
                     <div>
                       <strong>📄 Emailed Blank Forms &amp; Guides</strong>
@@ -1401,8 +1279,21 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="input-sailor-rank">Rank / Rate (Type Your Rate or Rank)</label>
-                <input type="text" id="input-sailor-rank" class="form-control" placeholder="e.g., YN2, PS1, HMC, LT, LCDR" maxlength="24">
+                <label class="form-label" for="input-sailor-rank">Rank / Rate</label>
+                <select id="input-sailor-rank" class="form-select">
+                  <option value="YN2">YN2 (E-5)</option>
+                  <option value="PS1">PS1 (E-6)</option>
+                  <option value="IT2">IT2 (E-5)</option>
+                  <option value="HM3">HM3 (E-4)</option>
+                  <option value="BM1">BM1 (E-6)</option>
+                  <option value="LS2">LS2 (E-5)</option>
+                  <option value="MA3">MA3 (E-4)</option>
+                  <option value="ET1">ET1 (E-6)</option>
+                  <option value="Chief (CPO)">Chief (E-7/E-8/E-9)</option>
+                  <option value="LT">LT (O-3)</option>
+                  <option value="LCDR">LCDR (O-4)</option>
+                  <option value="SN/FN/AN">SN / FN / AN (E-3)</option>
+                </select>
               </div>
 
               <div class="form-group">
@@ -1435,8 +1326,8 @@
                 <div class="ticket-pass-body">
                   <div style="font-size:0.78rem; color:var(--text-muted); text-transform:uppercase;">Your Ticket Number</div>
                   <div class="ticket-number-huge" id="live-ticket-num">--</div>
-                  <div class="ticket-sailor-prominent" id="live-ticket-sailor"></div>
-                  <div style="font-size:0.85rem; font-weight:600; color:var(--text-muted); margin-top:4px;" id="live-ticket-service"></div>
+                  <div style="font-size:0.9rem; font-weight:600; color:var(--text-main);" id="live-ticket-sailor"></div>
+                  <div style="font-size:0.8rem; color:var(--text-muted);" id="live-ticket-service"></div>
 
                   <!-- Dynamic Call / Transfer Message Banner -->
                   <div class="ticket-call-banner" id="live-ticket-call-box" style="display:none;">
@@ -1457,16 +1348,9 @@
                 </div>
               </div>
 
-              <div style="display:flex; gap:10px; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                <div class="leave-queue-confirm-zone">
-                  <button type="button" class="btn btn-subtle-leave" id="btn-leave-queue">Leave Queue</button>
-                  <div id="leave-queue-confirm-box" style="display:none; align-items:center; gap:6px; background:#fef2f2; border:1px solid #fecaca; padding:4px 8px; border-radius:6px;">
-                    <span style="font-size:0.72rem; color:#991b1b; font-weight:700;">Give up spot?</span>
-                    <button type="button" class="btn btn-danger btn-sm" id="btn-confirm-leave-queue" style="padding:3px 8px; font-size:0.72rem;">Yes, Leave</button>
-                    <button type="button" class="btn btn-outline btn-sm" id="btn-cancel-leave-queue" style="padding:3px 8px; font-size:0.72rem;">Stay</button>
-                  </div>
-                </div>
+              <div style="display:flex; gap:10px; justify-content:space-between;">
                 <button type="button" class="btn btn-outline" id="btn-new-sailor-scan">Simulate Another Sailor</button>
+                <button type="button" class="btn btn-danger btn-sm" id="btn-leave-queue">Leave Queue</button>
               </div>
             </div>
 
@@ -1480,23 +1364,40 @@
             <h3 style="margin-top:8px; color:var(--navy-primary);">NRC Houston Quarterdeck</h3>
             <p style="font-size:0.8rem; color:var(--text-muted);">Scan once with camera to access all 9 departments</p>
 
-            <!-- Real Scannable ISO-18004 QR Code SVG -->
-            <div class="qr-svg-wrap" id="real-qr-svg-container" aria-label="Scannable QR Code for NRC Houston"></div>
-
-            <div style="margin-top:8px; text-align:left;">
-              <label class="form-label" for="input-qr-target-url" style="font-size:0.74rem; color:var(--navy-primary);">
-                🔗 Live Scannable QR Destination URL:
-              </label>
-              <div style="display:flex; gap:6px; margin-bottom:8px;">
-                <input type="url" id="input-qr-target-url" class="form-control" style="font-size:0.75rem; padding:5px 8px; font-family:var(--font-mono);" placeholder="Enter live app URL for QR code...">
-                <button type="button" class="btn btn-primary btn-sm" id="btn-update-qr-url">Update QR</button>
-              </div>
-              <div style="display:flex; gap:6px; justify-content:center;">
-                <button type="button" class="btn btn-gold btn-sm" id="btn-open-qr-target" style="width:100%;">
-                  🚀 Launch / Test QR Check-In Link
-                </button>
-              </div>
+            <!-- Inline SVG QR Code Representation -->
+            <div class="qr-svg-wrap" aria-label="Single QR Code for NRC Houston">
+              <svg viewBox="0 0 100 100" width="100%" height="100%" fill="#06162e">
+                <rect x="5" y="5" width="26" height="26" fill="none" stroke="#06162e" stroke-width="4"/>
+                <rect x="11" y="11" width="14" height="14"/>
+                <rect x="69" y="5" width="26" height="26" fill="none" stroke="#06162e" stroke-width="4"/>
+                <rect x="75" y="11" width="14" height="14"/>
+                <rect x="5" y="69" width="26" height="26" fill="none" stroke="#06162e" stroke-width="4"/>
+                <rect x="11" y="75" width="14" height="14"/>
+                <rect x="37" y="7" width="6" height="6"/>
+                <rect x="49" y="7" width="12" height="6"/>
+                <rect x="37" y="19" width="12" height="6"/>
+                <rect x="55" y="19" width="6" height="12"/>
+                <rect x="7" y="37" width="12" height="6"/>
+                <rect x="25" y="37" width="6" height="12"/>
+                <rect x="37" y="37" width="24" height="24" fill="none" stroke="#eab308" stroke-width="3"/>
+                <text x="49" y="53" font-size="11" font-weight="bold" text-anchor="middle" fill="#06162e">NRC</text>
+                <rect x="67" y="37" width="6" height="12"/>
+                <rect x="79" y="43" width="14" height="6"/>
+                <rect x="7" y="55" width="18" height="6"/>
+                <rect x="67" y="55" width="12" height="6"/>
+                <rect x="85" y="55" width="8" height="12"/>
+                <rect x="37" y="67" width="6" height="18"/>
+                <rect x="49" y="73" width="12" height="6"/>
+                <rect x="67" y="67" width="18" height="6"/>
+                <rect x="67" y="79" width="6" height="14"/>
+                <rect x="79" y="85" width="14" height="8"/>
+                <rect x="49" y="87" width="12" height="6"/>
+              </svg>
             </div>
+
+            <p style="font-size:0.75rem; font-family:var(--font-mono); color:var(--navy-secondary); word-break:break-all;">
+              https://flankspeed.sharepoint-mil.us/sites/NRCHouston/SitePages/QueueApp.aspx
+            </p>
           </div>
 
           <!-- Active Tickets Simulator Switcher -->
@@ -1545,33 +1446,6 @@
             <label class="form-label" for="staff-preset-select">Message Preset to Sailor (Power Automate Teams/Email + TV):</label>
             <select id="staff-preset-select" class="form-select" style="margin-bottom:8px;"></select>
             <input type="text" id="staff-custom-msg" class="form-control" placeholder="Or type custom instruction (e.g., Report to Room 2430, see PS1)">
-          </div>
-
-          <!-- Streamlined Staff Quick-Editor for Services & Resource Links -->
-          <div style="border-top:2px solid #e2e8f0; padding-top:16px; margin-top:18px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <h4 style="font-size:0.95rem; color:var(--navy-primary);">🛠️ Quick-Edit Department Services &amp; Resource Links</h4>
-              <span class="flankspeed-badge" style="background:#e0f2fe; color:#0369a1; border-color:#7dd3fc;">Live Sync</span>
-            </div>
-            <p style="font-size:0.76rem; color:var(--text-muted); margin-bottom:10px;">
-              Add, rename, or remove services offered by <strong id="staff-editor-dept-label"></strong>, and attach a direct resource URL shown when Sailors pick that service.
-            </p>
-
-            <div id="staff-services-editor-list" style="max-height:290px; overflow-y:auto; padding-right:2px;"></div>
-
-            <div style="background:#f1f5f9; border:1px solid var(--border-color); border-radius:var(--radius); padding:10px; margin-top:10px;">
-              <div style="font-size:0.78rem; font-weight:700; color:var(--navy-primary); margin-bottom:6px;">➕ Add New Service to This Department</div>
-              <div style="display:flex; flex-direction:column; gap:6px;">
-                <input type="text" id="staff-new-service-name" class="form-control" style="font-size:0.82rem; padding:7px 10px;" placeholder="Service Name (e.g., Overseas Screening Package)">
-                <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap:6px;">
-                  <input type="text" id="staff-new-service-res-label" class="form-control" style="font-size:0.78rem; padding:6px 10px;" placeholder="Resource Label (e.g., NAVPERS 1300/16 Guide)">
-                  <input type="url" id="staff-new-service-res-url" class="form-control" style="font-size:0.78rem; padding:6px 10px;" placeholder="https://flankspeed.sharepoint-mil.us/...">
-                </div>
-                <button type="button" class="btn btn-primary btn-sm" id="btn-staff-add-service" style="align-self:flex-start;">
-                  + Add Service &amp; Resource Link
-                </button>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -1629,8 +1503,18 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="fd-rank">Rank / Rate (Type Rate or Rank)</label>
-            <input type="text" id="fd-rank" class="form-control" placeholder="e.g., YN2, PS1, BM2, HMC, LT" maxlength="24">
+            <label class="form-label" for="fd-rank">Rank / Rate</label>
+            <select id="fd-rank" class="form-select">
+              <option value="YN2">YN2</option>
+              <option value="PS1">PS1</option>
+              <option value="BM2">BM2</option>
+              <option value="HM3">HM3</option>
+              <option value="IT1">IT1</option>
+              <option value="LS3">LS3</option>
+              <option value="Chief (CPO)">Chief (CPO)</option>
+              <option value="LT">LT</option>
+              <option value="SN">SN</option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -1701,7 +1585,7 @@
                 ⚓ NAVY RESERVE CENTER HOUSTON — NOW SERVING
               </h2>
               <p style="font-size:0.9rem; color:#94a3b8;">
-                Live Waiting Room Ticket Display: Showing Ticket Numbers, Rate/Rank &amp; Name, and Reporting Rooms
+                Privacy Protected Display: Showing Ticket Numbers &amp; Reporting Rooms Only (Zero PII)
               </p>
             </div>
             <div class="tv-clock" id="tv-live-clock">08:33:58</div>
@@ -1972,16 +1856,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 2430",
           paused: false,
           services: ["Pay / Travel Claim (DTS)", "Page 2 / Dependency Update", "Evaluations / FITREPs", "Awards & Directives"],
-          serviceResources: {
-            "Pay / Travel Claim (DTS)": {
-              label: "DTS Voucher Self-Audit Checklist & MilPay Portal",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N1Admin/DTS_Travel_Guide.pdf"
-            },
-            "Page 2 / Dependency Update": {
-              label: "NSIPS RED/DA Online Self-Update Instructions",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N1Admin/RED_DA_StepByStep.pdf"
-            }
-          },
           selfServiceDoc: "NPPSC 1300/1 & Travel Claim Checklist PDF",
           turnInLink: "Flank Speed SharePoint -> N1 Admin Encrypted Drop Folder",
           contactInfo: "NRC_Houston_N1Admin@us.navy.mil | Desk Ext. 2430"
@@ -1992,12 +1866,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 2432",
           paused: false,
           services: ["TRUIC / RUIC Change", "Billet Assignment (MyNavy Assignment)", "Gain / Loss Package", "MAS Code Update"],
-          serviceResources: {
-            "Billet Assignment (MyNavy Assignment)": {
-              label: "MyNavy Assignment Cycle Schedule & Application Portal",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N1Manpower/MNA_Guide.pdf"
-            }
-          },
           selfServiceDoc: "TRUIC Change Request SOP & Billet Guide",
           turnInLink: "Flank Speed SharePoint -> N1 Manpower Package Drop",
           contactInfo: "NRC_Houston_Manpower@us.navy.mil | Desk Ext. 2432"
@@ -2008,16 +1876,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 2110",
           paused: false,
           services: ["Reenlistment / Extension", "GI Bill / Montgomery Benefits", "C-Way / Rating Conversion", "Retirement Points Check"],
-          serviceResources: {
-            "GI Bill / Montgomery Benefits": {
-              label: "MilConnect TEB (Transfer of Education Benefits) Guide",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N00C/GI_Bill_TEB_Guide.pdf"
-            },
-            "Retirement Points Check": {
-              label: "ARPR / ASOSH Online Statement Verification SOP",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N00C/ARPR_Points_Guide.pdf"
-            }
-          },
           selfServiceDoc: "Reserve Reenlistment & GI Bill Transfer Checklist",
           turnInLink: "Flank Speed SharePoint -> N00C Career Counselor Drop",
           contactInfo: "NRC_Houston_CCC@us.navy.mil | Desk Ext. 2110"
@@ -2028,16 +1886,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 2205",
           paused: false,
           services: ["AT / ADT / IDTT Orders", "Mobilization Readiness Screening", "NROWS Order Modification", "GTCC Travel Card Activation"],
-          serviceResources: {
-            "AT / ADT / IDTT Orders": {
-              label: "NROWS FY Order Writing & Routing Quick-Reference",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N3Ops/NROWS_Routing_SOP.pdf"
-            },
-            "GTCC Travel Card Activation": {
-              label: "CitiManager GTCC Activation & APC Request Form",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N3Ops/GTCC_Activation.pdf"
-            }
-          },
           selfServiceDoc: "NROWS Order Routing Guide & GTCC Activation SOP",
           turnInLink: "Flank Speed SharePoint -> N3 Orders & Mob Drop",
           contactInfo: "NRC_Houston_N3Ops@us.navy.mil | Desk Ext. 2205"
@@ -2048,12 +1896,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 1140",
           paused: false,
           services: ["BERP / Billeting Reservations", "Uniform Issue / Replacement", "Facility / Parking Pass", "Government Vehicle Request"],
-          serviceResources: {
-            "BERP / Billeting Reservations": {
-              label: "NRC Houston BERP Hotel Eligibility & Request Link",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N4Supply/BERP_Lodging_Form"
-            }
-          },
           selfServiceDoc: "Drill Weekend BERP Lodging Policy & Uniform Form",
           turnInLink: "Flank Speed SharePoint -> N4 Supply & Billeting Portal",
           contactInfo: "NRC_Houston_N4Supply@us.navy.mil | Desk Ext. 1140"
@@ -2064,12 +1906,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 2215",
           paused: false,
           services: ["Funeral Honors Detail Check-In", "Command Drill Schedule Inquiry", "Community Outreach Event"],
-          serviceResources: {
-            "Command Drill Schedule Inquiry": {
-              label: "FY25/FY26 NRC Houston Master Drill Weekend Calendar",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N5Plans/FY_Drill_Calendar.pdf"
-            }
-          },
           selfServiceDoc: "Funeral Honors Uniform Checklist & Drill Calendar",
           turnInLink: "Flank Speed SharePoint -> N5 Funeral Honors Drop",
           contactInfo: "NRC_Houston_N5Plans@us.navy.mil | Desk Ext. 2215"
@@ -2080,16 +1916,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 1208",
           paused: false,
           services: ["CAC PIN Reset", "Flank Speed Account / M365 Access", "SAAR-N Form Processing", "NMCI Profile Unlock"],
-          serviceResources: {
-            "SAAR-N Form Processing": {
-              label: "OPNAV 5239/14 SAAR-N Fillable PDF & Digital Sign Guide",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N6IT/SAAR_N_Template.pdf"
-            },
-            "Flank Speed Account / M365 Access": {
-              label: "Nautilus Virtual Desktop (NVD) & Flank Speed Onboarding",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N6IT/FlankSpeed_Setup.pdf"
-            }
-          },
           selfServiceDoc: "Flank Speed Self-Setup Guide & SAAR-N Template",
           turnInLink: "Flank Speed SharePoint -> N6 SAAR-N Drop Box",
           contactInfo: "NRC_Houston_N6IT@us.navy.mil | Desk Ext. 1208"
@@ -2100,12 +1926,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 2310",
           paused: false,
           services: ["GMT Completion Verification", "Advancement Exam / Profile Sheet", "PFA / PRIMS Record Update", "FLTMPS Training Entry"],
-          serviceResources: {
-            "GMT Completion Verification": {
-              label: "MyNavy Portal Mandatory FY GMT Course Links",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N7Training/FY_GMT_Links.pdf"
-            }
-          },
           selfServiceDoc: "FY Advancement Bibs & FLTMPS Self-Submission Guide",
           turnInLink: "Flank Speed SharePoint -> N7 Training Cert Drop",
           contactInfo: "NRC_Houston_N7Training@us.navy.mil | Desk Ext. 2310"
@@ -2116,16 +1936,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           room: "Room 1300",
           paused: false,
           services: ["PHA Completion Check", "Dental Readiness Class Update", "Immunization / Flu Shot Check-In", "MRR Medical Hold Inquiry"],
-          serviceResources: {
-            "PHA Completion Check": {
-              label: "DoD Electronic PHA (ePHA) Online Portal Instructions",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N9Medical/ePHA_Instructions.pdf"
-            },
-            "Dental Readiness Class Update": {
-              label: "DD Form 2813 Civilian Dentist Exam Form Download",
-              url: "https://flankspeed.sharepoint-mil.us/sites/NRCHouston/N9Medical/DD2813_Blank.pdf"
-            }
-          },
           selfServiceDoc: "ePHA Portal Instructions & DD2813 Dental Form",
           turnInLink: "Flank Speed SharePoint -> N9 Non-PHI Admin Drop",
           contactInfo: "NRC_Houston_N9Medical@us.navy.mil | Desk Ext. 1300"
@@ -2348,293 +2158,11 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
         ];
       }
 
-      // Minimal ISO/IEC 18004 QR Code Generator (Versions 1-6, Error Correction L, Byte Mode)
-      // Produces a real scannable QR code SVG offline with zero external libraries
-      const RealQRGenerator = (function () {
-        // Total codewords and EC codewords per block for Version 1..6 (Level L, 1 block)
-        const VERSION_PARAMS = [
-          null,
-          { size: 21, totalBytes: 26, dataBytes: 19, ecBytes: 7, align: [] },
-          { size: 25, totalBytes: 44, dataBytes: 34, ecBytes: 10, align: [6, 18] },
-          { size: 29, totalBytes: 70, dataBytes: 55, ecBytes: 15, align: [6, 22] },
-          { size: 33, totalBytes: 100, dataBytes: 80, ecBytes: 20, align: [6, 26] },
-          { size: 37, totalBytes: 134, dataBytes: 108, ecBytes: 26, align: [6, 30] },
-          { size: 41, totalBytes: 172, dataBytes: 136, ecBytes: 18, blocks: 2, align: [6, 34] }
-        ];
-
-        const GF_EXP = new Uint8Array(512);
-        const GF_LOG = new Uint8Array(256);
-        (function initGalois() {
-          let x = 1;
-          for (let i = 0; i < 255; i++) {
-            GF_EXP[i] = x;
-            GF_LOG[x] = i;
-            x <<= 1;
-            if (x & 0x100) x ^= 0x11d;
-          }
-          for (let i = 255; i < 512; i++) {
-            GF_EXP[i] = GF_EXP[i - 255];
-          }
-        })();
-
-        function gfMul(a, b) {
-          if (a === 0 || b === 0) return 0;
-          return GF_EXP[GF_LOG[a] + GF_LOG[b]];
-        }
-
-        function rsGeneratorPoly(degree) {
-          let poly = [1];
-          for (let i = 0; i < degree; i++) {
-            const next = new Array(poly.length + 1).fill(0);
-            const root = GF_EXP[i];
-            for (let j = 0; j < poly.length; j++) {
-              next[j] ^= poly[j];
-              next[j + 1] ^= gfMul(poly[j], root);
-            }
-            poly = next;
-          }
-          return poly;
-        }
-
-        function rsEncode(data, ecLen) {
-          const gen = rsGeneratorPoly(ecLen);
-          const msg = new Uint8Array(data.length + ecLen);
-          msg.set(data, 0);
-          for (let i = 0; i < data.length; i++) {
-            const coef = msg[i];
-            if (coef !== 0) {
-              for (let j = 0; j < gen.length; j++) {
-                msg[i + j] ^= gfMul(gen[j], coef);
-              }
-            }
-          }
-          return msg.slice(data.length);
-        }
-
-        function pickVersion(byteLen) {
-          for (let v = 1; v <= 6; v++) {
-            if (byteLen + 2 <= VERSION_PARAMS[v].dataBytes) return v;
-          }
-          return 6;
-        }
-
-        function encodeBytes(str) {
-          const utf8 = new TextEncoder().encode(str);
-          const v = pickVersion(utf8.length);
-          const params = VERSION_PARAMS[v];
-          const maxPayload = params.dataBytes - 2;
-          const bytes = utf8.length > maxPayload ? utf8.slice(0, maxPayload) : utf8;
-
-          const bits = [];
-          function pushBits(val, len) {
-            for (let i = len - 1; i >= 0; i--) {
-              bits.push((val >>> i) & 1);
-            }
-          }
-
-          // Byte mode (0100)
-          pushBits(0b0100, 4);
-          pushBits(bytes.length, 8);
-          for (let i = 0; i < bytes.length; i++) {
-            pushBits(bytes[i], 8);
-          }
-          // Terminator up to 4 bits
-          const maxBits = params.dataBytes * 8;
-          for (let i = 0; i < 4 && bits.length < maxBits; i++) {
-            bits.push(0);
-          }
-          while (bits.length % 8 !== 0) {
-            bits.push(0);
-          }
-          const dataCodewords = new Uint8Array(params.dataBytes);
-          for (let i = 0; i < bits.length / 8; i++) {
-            let b = 0;
-            for (let j = 0; j < 8; j++) {
-              b = (b << 1) | bits[i * 8 + j];
-            }
-            dataCodewords[i] = b;
-          }
-          const padBytes = [0xec, 0x11];
-          let padIdx = 0;
-          for (let i = bits.length / 8; i < params.dataBytes; i++) {
-            dataCodewords[i] = padBytes[padIdx % 2];
-            padIdx++;
-          }
-
-          let finalCodewords;
-          if (params.blocks === 2) {
-            const half = params.dataBytes / 2;
-            const b1 = dataCodewords.slice(0, half);
-            const b2 = dataCodewords.slice(half);
-            const ec1 = rsEncode(b1, params.ecBytes);
-            const ec2 = rsEncode(b2, params.ecBytes);
-            finalCodewords = new Uint8Array(params.totalBytes);
-            let ptr = 0;
-            for (let i = 0; i < half; i++) {
-              finalCodewords[ptr++] = b1[i];
-              finalCodewords[ptr++] = b2[i];
-            }
-            for (let i = 0; i < params.ecBytes; i++) {
-              finalCodewords[ptr++] = ec1[i];
-              finalCodewords[ptr++] = ec2[i];
-            }
-          } else {
-            const ec = rsEncode(dataCodewords, params.ecBytes);
-            finalCodewords = new Uint8Array(params.totalBytes);
-            finalCodewords.set(dataCodewords, 0);
-            finalCodewords.set(ec, params.dataBytes);
-          }
-
-          return { version: v, params: params, codewords: finalCodewords };
-        }
-
-        function buildMatrix(text) {
-          const { params, codewords } = encodeBytes(text);
-          const size = params.size;
-          const matrix = Array.from({ length: size }, () => new Int8Array(size).fill(-1));
-          const reserved = Array.from({ length: size }, () => new Uint8Array(size));
-
-          function setFinder(r0, c0) {
-            for (let dr = -1; dr <= 7; dr++) {
-              for (let dc = -1; dc <= 7; dc++) {
-                const r = r0 + dr;
-                const c = c0 + dc;
-                if (r < 0 || r >= size || c < 0 || c >= size) continue;
-                const inOuter = dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6;
-                const onBorder = dr === 0 || dr === 6 || dc === 0 || dc === 6;
-                const inInner = dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4;
-                matrix[r][c] = (inOuter && (onBorder || inInner)) ? 1 : 0;
-                reserved[r][c] = 1;
-              }
-            }
-          }
-
-          setFinder(0, 0);
-          setFinder(0, size - 7);
-          setFinder(size - 7, 0);
-
-          // Alignment patterns
-          if (params.align.length > 0) {
-            const coords = params.align;
-            for (let i = 0; i < coords.length; i++) {
-              for (let j = 0; j < coords.length; j++) {
-                const cr = coords[i];
-                const cc = coords[j];
-                if (reserved[cr][cc]) continue;
-                for (let dr = -2; dr <= 2; dr++) {
-                  for (let dc = -2; dc <= 2; dc++) {
-                    const isDark = Math.max(Math.abs(dr), Math.abs(dc)) !== 1;
-                    matrix[cr + dr][cc + dc] = isDark ? 1 : 0;
-                    reserved[cr + dr][cc + dc] = 1;
-                  }
-                }
-              }
-            }
-          }
-
-          // Timing patterns
-          for (let i = 8; i < size - 8; i++) {
-            const bit = (i % 2 === 0) ? 1 : 0;
-            if (!reserved[6][i]) {
-              matrix[6][i] = bit;
-              reserved[6][i] = 1;
-            }
-            if (!reserved[i][6]) {
-              matrix[i][6] = bit;
-              reserved[i][6] = 1;
-            }
-          }
-
-          // Dark module & reserve format info areas
-          matrix[size - 8][8] = 1;
-          reserved[size - 8][8] = 1;
-          for (let i = 0; i < 9; i++) {
-            if (i < size) {
-              reserved[8][i] = 1;
-              reserved[i][8] = 1;
-            }
-          }
-          for (let i = 0; i < 8; i++) {
-            reserved[8][size - 1 - i] = 1;
-            reserved[size - 1 - i][8] = 1;
-          }
-
-          // Place data bits (upward/downward 2-column zig-zag)
-          const allBits = [];
-          for (let i = 0; i < codewords.length; i++) {
-            for (let b = 7; b >= 0; b--) {
-              allBits.push((codewords[i] >>> b) & 1);
-            }
-          }
-
-          let bitIdx = 0;
-          let upward = true;
-          for (let right = size - 1; right >= 1; right -= 2) {
-            if (right === 6) right = 5;
-            for (let vert = 0; vert < size; vert++) {
-              const r = upward ? (size - 1 - vert) : vert;
-              for (let j = 0; j < 2; j++) {
-                const c = right - j;
-                if (!reserved[r][c]) {
-                  const dark = bitIdx < allBits.length ? allBits[bitIdx++] : 0;
-                  // Apply Mask 0: (r + c) % 2 === 0
-                  matrix[r][c] = ((r + c) % 2 === 0) ? (dark ^ 1) : dark;
-                }
-              }
-            }
-            upward = !upward;
-          }
-
-          // Format info for Level L (01) + Mask 0 (000) -> 0x77c4
-          const formatBits = 0x77c4;
-          const fBits = [];
-          for (let i = 0; i < 15; i++) {
-            fBits.push((formatBits >>> i) & 1);
-          }
-
-          // Around top-left
-          const tlRows = [8, 8, 8, 8, 8, 8, 8, 8, 7, 5, 4, 3, 2, 1, 0];
-          const tlCols = [0, 1, 2, 3, 4, 5, 7, 8, 8, 8, 8, 8, 8, 8, 8];
-          for (let i = 0; i < 15; i++) {
-            matrix[tlRows[i]][tlCols[i]] = fBits[14 - i];
-          }
-
-          // Bottom-left & top-right
-          for (let i = 0; i < 7; i++) {
-            matrix[size - 1 - i][8] = fBits[14 - i];
-          }
-          for (let i = 7; i < 15; i++) {
-            matrix[8][size - 15 + i] = fBits[14 - i];
-          }
-
-          return matrix;
-        }
-
-        function toSvg(url) {
-          const matrix = buildMatrix(url);
-          const n = matrix.length;
-          const quiet = 2;
-          const total = n + quiet * 2;
-          let paths = "";
-          for (let r = 0; r < n; r++) {
-            for (let c = 0; c < n; c++) {
-              if (matrix[r][c] === 1) {
-                paths += `<rect x="${c + quiet}" y="${r + quiet}" width="1" height="1"/>`;
-              }
-            }
-          }
-          return `<svg viewBox="0 0 ${total} ${total}" width="100%" height="100%" fill="#06162e" shape-rendering="crispEdges" role="img" aria-label="Scannable QR Code">${paths}</svg>`;
-        }
-
-        return { toSvg: toSvg };
-      })();
-
       // Application State
       let state = {
         departments: [],
         presets: [],
         tickets: [],
-        qrTargetUrl: "",
         ticketSeq: 107,
         selfServiceCount: 9,
         activeView: "sailor",
@@ -2654,15 +2182,9 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           const raw = localStorage.getItem(STORAGE_KEY);
           if (raw) {
             const parsed = JSON.parse(raw);
-            state.departments = (parsed.departments || JSON.parse(JSON.stringify(DEFAULT_DEPARTMENTS))).map((d, idx) => {
-              const fallback = DEFAULT_DEPARTMENTS[idx] || {};
-              return Object.assign({}, fallback, d, {
-                serviceResources: d.serviceResources || fallback.serviceResources || {}
-              });
-            });
+            state.departments = parsed.departments || JSON.parse(JSON.stringify(DEFAULT_DEPARTMENTS));
             state.presets = parsed.presets || [...DEFAULT_PRESETS];
             state.tickets = parsed.tickets || generateInitialTickets();
-            state.qrTargetUrl = parsed.qrTargetUrl || (window.location.href && window.location.href.startsWith("http") ? window.location.href : "https://www.navyreserve.navy.mil");
             state.ticketSeq = parsed.ticketSeq || 107;
             state.selfServiceCount = typeof parsed.selfServiceCount === "number" ? parsed.selfServiceCount : 9;
             state.sailorFlow.activeTicketId = parsed.activeTicketId || null;
@@ -2680,7 +2202,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
             departments: state.departments,
             presets: state.presets,
             tickets: state.tickets,
-            qrTargetUrl: state.qrTargetUrl,
             ticketSeq: state.ticketSeq,
             selfServiceCount: state.selfServiceCount,
             activeTicketId: state.sailorFlow.activeTicketId
@@ -2694,9 +2215,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
         state.departments = JSON.parse(JSON.stringify(DEFAULT_DEPARTMENTS));
         state.presets = [...DEFAULT_PRESETS];
         state.tickets = generateInitialTickets();
-        state.qrTargetUrl = (window.location.href && window.location.href.startsWith("http"))
-          ? window.location.href
-          : "https://www.navyreserve.navy.mil";
         state.ticketSeq = 107;
         state.selfServiceCount = 9;
         state.sailorFlow = {
@@ -2848,14 +2366,7 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
               sBtn.style.borderColor = "var(--navy-primary)";
               sBtn.style.backgroundColor = "#e0f2fe";
             }
-            const hasResource = dept.serviceResources && dept.serviceResources[srv] && dept.serviceResources[srv].url;
-            sBtn.innerHTML = `
-              <span>
-                ${escapeHtml(srv)}
-                ${hasResource ? `<span style="font-size:0.68rem; background:#dbeafe; color:#1e40af; padding:2px 6px; border-radius:999px; margin-left:6px; font-weight:700;">🔗 Resource Link</span>` : ""}
-              </span>
-              <span>→</span>
-            `;
+            sBtn.innerHTML = `<span>${escapeHtml(srv)}</span><span>→</span>`;
             sBtn.addEventListener("click", () => {
               state.sailorFlow.selectedService = srv;
               renderSailorView();
@@ -2866,21 +2377,10 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           const ssPanel = document.getElementById("self-service-panel");
           if (state.sailorFlow.selectedService) {
             ssPanel.style.display = "block";
-            const srvName = state.sailorFlow.selectedService;
-            document.getElementById("ss-service-name").textContent = srvName;
+            document.getElementById("ss-service-name").textContent = state.sailorFlow.selectedService;
             document.getElementById("ss-doc-desc").textContent = dept.selfServiceDoc;
             document.getElementById("ss-turnin-desc").textContent = dept.turnInLink;
             document.getElementById("ss-contact-desc").textContent = dept.contactInfo;
-
-            const specificRow = document.getElementById("ss-specific-resource-row");
-            const resObj = dept.serviceResources && dept.serviceResources[srvName];
-            if (resObj && resObj.url) {
-              specificRow.style.display = "flex";
-              document.getElementById("ss-specific-resource-title").textContent = resObj.label || (srvName + " Resource");
-              document.getElementById("ss-specific-resource-url").textContent = resObj.url;
-            } else {
-              specificRow.style.display = "none";
-            }
           } else {
             ssPanel.style.display = "none";
           }
@@ -2897,10 +2397,7 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           const dept = getDept(tkt.deptCode);
           document.getElementById("live-ticket-dept").textContent = dept.name + " (" + dept.room + ")";
           document.getElementById("live-ticket-num").textContent = tkt.number;
-          document.getElementById("live-ticket-sailor").innerHTML = `
-            <span class="rank-tag">${escapeHtml(tkt.rank)}</span>
-            <span>${escapeHtml(tkt.name)}</span>
-          `;
+          document.getElementById("live-ticket-sailor").textContent = tkt.rank + " " + tkt.name;
           document.getElementById("live-ticket-service").textContent = tkt.service + (tkt.transferredFrom ? " (Transferred from " + tkt.transferredFrom + ")" : "");
 
           const pill = document.getElementById("live-ticket-status-pill");
@@ -2926,24 +2423,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           } else {
             document.getElementById("live-ticket-position").textContent = "—";
             document.getElementById("live-ticket-estwait").textContent = "—";
-          }
-
-          const confirmBox = document.getElementById("leave-queue-confirm-box");
-          const leaveBtn = document.getElementById("btn-leave-queue");
-          if (confirmBox && leaveBtn) {
-            confirmBox.style.display = "none";
-            leaveBtn.style.display = "inline-flex";
-          }
-        }
-
-        // Render Real Scannable QR Code SVG & URL Input
-        const qrContainer = document.getElementById("real-qr-svg-container");
-        const qrInput = document.getElementById("input-qr-target-url");
-        if (qrContainer) {
-          const targetUrl = state.qrTargetUrl || "https://www.navyreserve.navy.mil";
-          qrContainer.innerHTML = RealQRGenerator.toSvg(targetUrl);
-          if (qrInput && document.activeElement !== qrInput) {
-            qrInput.value = targetUrl;
           }
         }
 
@@ -3057,30 +2536,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
             activeContainer.appendChild(box);
           });
         }
-
-        // Render Streamlined Staff Service & Resource Link Editor
-        document.getElementById("staff-editor-dept-label").textContent = dept.name;
-        const srvEditorList = document.getElementById("staff-services-editor-list");
-        srvEditorList.innerHTML = "";
-        if (!dept.serviceResources) dept.serviceResources = {};
-
-        dept.services.forEach((srv, sIdx) => {
-          const res = dept.serviceResources[srv] || { label: "", url: "" };
-          const item = document.createElement("div");
-          item.className = "staff-service-editor-item";
-          item.innerHTML = `
-            <div class="staff-service-editor-top">
-              <input type="text" class="form-control" style="font-size:0.82rem; font-weight:700; padding:5px 8px;" id="staff-srv-name-${sIdx}" value="${escapeHtml(srv)}" title="Service Name">
-              <button type="button" class="btn btn-danger btn-sm" data-staff-del-srv="${sIdx}" title="Remove Service">Remove</button>
-            </div>
-            <div class="staff-service-editor-link-row">
-              <input type="text" class="form-control" style="font-size:0.75rem; padding:5px 8px;" id="staff-srv-label-${sIdx}" value="${escapeHtml(res.label || "")}" placeholder="Resource title (optional)">
-              <input type="url" class="form-control" style="font-size:0.75rem; padding:5px 8px;" id="staff-srv-url-${sIdx}" value="${escapeHtml(res.url || "")}" placeholder="Resource Link URL (https://...)">
-              <button type="button" class="btn btn-primary btn-sm" data-staff-save-srv="${sIdx}">Save</button>
-            </div>
-          `;
-          srvEditorList.appendChild(item);
-        });
 
         // Waiting Queue Table for Selected Department
         const waitingList = getWaitingForDept(dept.code);
@@ -3234,16 +2689,13 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
             const dept = getDept(tkt.deptCode);
             const card = document.createElement("div");
             card.className = "tv-call-card";
+            // Strictly Ticket Number, Department, Room, and Non-PII Instruction
             card.innerHTML = `
               <div>
                 <div style="font-size:0.8rem; color:#93c5fd; text-transform:uppercase; font-weight:700;">
                   ${escapeHtml(dept.name)}
                 </div>
                 <div class="tv-ticket-num">${escapeHtml(tkt.number)}</div>
-                <div class="tv-sailor-name">
-                  <span class="tv-rank-badge">${escapeHtml(tkt.rank)}</span>
-                  <span>${escapeHtml(tkt.name)}</span>
-                </div>
               </div>
               <div class="tv-room-info">
                 <div class="room">${escapeHtml(dept.room)}</div>
@@ -3270,7 +2722,7 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
               ${d.paused
                 ? `<span style="color:#f87171; font-weight:700;">PAUSED</span>`
                 : `<span style="color:#cbd5e1;">Waiting: <strong style="color:var(--gold-primary);">${wCount}</strong></span>
-                   ${nextTkt ? `<span style="font-size:0.78rem; color:#93c5fd; margin-left:8px;">Up Next: ${escapeHtml(nextTkt.number)} (${escapeHtml(nextTkt.rank)} ${escapeHtml(nextTkt.name)})</span>` : ""}`
+                   ${nextTkt ? `<span style="font-size:0.78rem; color:#93c5fd; margin-left:8px;">Up Next: ${escapeHtml(nextTkt.number)}</span>` : ""}`
               }
             </div>
           `;
@@ -3464,14 +2916,13 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
       // =========================================================
 
       function createTicket(rank, name, email, deptCode, service, notes) {
-        const cleanRank = (rank || "").trim().toUpperCase() || "SAILOR";
         const cleanName = (name || "").trim() || "Sailor, R.";
         const dept = getDept(deptCode);
         const seq = state.ticketSeq++;
         const tkt = {
           id: "TKT-" + seq,
           number: deptCode + "-" + seq,
-          rank: cleanRank,
+          rank: rank,
           name: cleanName,
           email: (email || "").trim(),
           deptCode: deptCode,
@@ -3729,15 +3180,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
         });
 
         // Self-Service Deflection Buttons
-        document.getElementById("btn-ss-open-resource").addEventListener("click", () => {
-          const dept = getDept(state.sailorFlow.selectedDeptCode);
-          const srvName = state.sailorFlow.selectedService;
-          const resObj = dept.serviceResources && dept.serviceResources[srvName];
-          if (resObj && resObj.url) {
-            showToast(`Opened Service Resource: "${resObj.label || srvName}" (${resObj.url})`);
-          }
-        });
-
         document.getElementById("btn-ss-email-doc").addEventListener("click", () => {
           const dept = getDept(state.sailorFlow.selectedDeptCode);
           showToast(`Power Automate emailed "${dept.selfServiceDoc}" to your Flank Speed inbox.`);
@@ -3772,7 +3214,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
             notes
           );
 
-          document.getElementById("input-sailor-rank").value = "";
           document.getElementById("input-sailor-name").value = "";
           document.getElementById("input-sailor-notes").value = "";
 
@@ -3789,24 +3230,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
         });
 
         document.getElementById("btn-leave-queue").addEventListener("click", () => {
-          const confirmBox = document.getElementById("leave-queue-confirm-box");
-          const leaveBtn = document.getElementById("btn-leave-queue");
-          if (confirmBox && leaveBtn) {
-            leaveBtn.style.display = "none";
-            confirmBox.style.display = "inline-flex";
-          }
-        });
-
-        document.getElementById("btn-cancel-leave-queue").addEventListener("click", () => {
-          const confirmBox = document.getElementById("leave-queue-confirm-box");
-          const leaveBtn = document.getElementById("btn-leave-queue");
-          if (confirmBox && leaveBtn) {
-            confirmBox.style.display = "none";
-            leaveBtn.style.display = "inline-flex";
-          }
-        });
-
-        document.getElementById("btn-confirm-leave-queue").addEventListener("click", () => {
           if (state.sailorFlow.activeTicketId) {
             noShowTicket(state.sailorFlow.activeTicketId);
             state.sailorFlow.activeTicketId = null;
@@ -3856,115 +3279,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
         document.getElementById("staff-queue-tbody").addEventListener("click", handleTableActionClick);
         document.getElementById("fd-master-tbody").addEventListener("click", handleTableActionClick);
 
-        // Staff View Inline Service & Resource Link Editor Events
-        document.getElementById("staff-services-editor-list").addEventListener("click", (e) => {
-          const dept = getDept(state.staffSelectedDept);
-          if (!dept.serviceResources) dept.serviceResources = {};
-
-          const saveBtn = e.target.closest("button[data-staff-save-srv]");
-          if (saveBtn) {
-            const idx = parseInt(saveBtn.getAttribute("data-staff-save-srv"), 10);
-            const oldName = dept.services[idx];
-            const newName = (document.getElementById("staff-srv-name-" + idx).value || "").trim();
-            const resLabel = (document.getElementById("staff-srv-label-" + idx).value || "").trim();
-            const resUrl = (document.getElementById("staff-srv-url-" + idx).value || "").trim();
-
-            if (!newName) {
-              showToast("Service name cannot be empty.");
-              return;
-            }
-
-            dept.services[idx] = newName;
-            if (oldName !== newName && dept.serviceResources[oldName]) {
-              delete dept.serviceResources[oldName];
-            }
-            if (resUrl) {
-              dept.serviceResources[newName] = {
-                label: resLabel || (newName + " Resource"),
-                url: resUrl
-              };
-            } else {
-              delete dept.serviceResources[newName];
-            }
-
-            saveState();
-            renderAll();
-            showToast(`Updated service "${newName}" for ${dept.name}.`);
-            return;
-          }
-
-          const delBtn = e.target.closest("button[data-staff-del-srv]");
-          if (delBtn) {
-            const idx = parseInt(delBtn.getAttribute("data-staff-del-srv"), 10);
-            if (dept.services.length <= 1) {
-              showToast("Each department must keep at least one service option.");
-              return;
-            }
-            const removed = dept.services.splice(idx, 1)[0];
-            if (removed && dept.serviceResources[removed]) {
-              delete dept.serviceResources[removed];
-            }
-            saveState();
-            renderAll();
-            showToast(`Removed service "${removed}" from ${dept.name}.`);
-          }
-        });
-
-        document.getElementById("btn-staff-add-service").addEventListener("click", () => {
-          const dept = getDept(state.staffSelectedDept);
-          if (!dept.serviceResources) dept.serviceResources = {};
-          const nameInput = document.getElementById("staff-new-service-name");
-          const labelInput = document.getElementById("staff-new-service-res-label");
-          const urlInput = document.getElementById("staff-new-service-res-url");
-
-          const newName = (nameInput.value || "").trim();
-          const resLabel = (labelInput.value || "").trim();
-          const resUrl = (urlInput.value || "").trim();
-
-          if (!newName) {
-            showToast("Please enter a service name to add.");
-            return;
-          }
-
-          if (!dept.services.includes(newName)) {
-            dept.services.push(newName);
-          }
-          if (resUrl) {
-            dept.serviceResources[newName] = {
-              label: resLabel || (newName + " Resource"),
-              url: resUrl
-            };
-          }
-
-          nameInput.value = "";
-          labelInput.value = "";
-          urlInput.value = "";
-          saveState();
-          renderAll();
-          showToast(`Added "${newName}" to ${dept.name} services.`);
-        });
-
-        // Real QR Code URL Update & Launch Events
-        document.getElementById("btn-update-qr-url").addEventListener("click", () => {
-          const val = (document.getElementById("input-qr-target-url").value || "").trim();
-          if (!val) {
-            showToast("Please enter a valid URL for the QR code.");
-            return;
-          }
-          state.qrTargetUrl = val;
-          saveState();
-          renderSailorView();
-          showToast("Updated scannable QR code with new destination URL.");
-        });
-
-        document.getElementById("btn-open-qr-target").addEventListener("click", () => {
-          const targetUrl = state.qrTargetUrl || "https://www.navyreserve.navy.mil";
-          state.sailorFlow.step = 1;
-          renderSailorView();
-          window.open(targetUrl, "_blank", "noopener,noreferrer");
-          showToast(`Launched QR target link: ${targetUrl}`);
-        });
-
         // Front Desk Events
         document.getElementById("fd-dept").addEventListener("change", populateFdServiceDropdown);
         document.getElementById("fd-filter-dept").addEventListener("change", renderFrontDeskView);
@@ -3977,7 +3291,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
           const notes = document.getElementById("fd-notes").value;
 
           const tkt = createTicket(rank, name, "", deptCode, service, notes || "Added at Quarterdeck");
-          document.getElementById("fd-rank").value = "";
           document.getElementById("fd-name").value = "";
           document.getElementById("fd-notes").value = "";
           showToast(`Quarterdeck added ${tkt.number} (${tkt.rank} ${tkt.name}) to ${deptCode}.`);
@@ -4066,6 +3379,6 @@ Action 2: Send an email (V2) (Office 365 Outlook)</div>
     })();
   </script>
 
-    <script src="testRecorder.js"></script>
+<!-- <script src="testRecorder.js"></script> -->
 </body>
 </html>
