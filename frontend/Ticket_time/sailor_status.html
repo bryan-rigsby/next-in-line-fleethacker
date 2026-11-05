@@ -369,6 +369,7 @@
 </head>
 
 <body>
+
   <header class="site-header">
     <div class="eyebrow">Navy Reserve Center Houston</div>
     <h1>Sailor Live Ticket Status</h1>
@@ -476,7 +477,7 @@
       only the matching Sailor's permitted ticket data.
     */
     const CONFIG = Object.freeze({
-      apiBaseUrl: "https://YOUR-APPROVED-API.example/api",
+      apiBaseUrl: "/api",
       refreshIntervalMs: 15000
     });
 
@@ -488,16 +489,14 @@
       Expected JSON response:
 
       {
-        "displayName": "YN2 Smith, J.",
         "ticketNumber": "N6-104",
-        "department": "N6 – Information Technology",
+        "department": "N6",
         "serviceRequested": "CAC PIN Reset",
         "status": "Waiting",
         "queuePosition": 3,
         "joinedAt": "2026-11-05T14:15:00Z",
         "calledAt": null,
-        "estimatedWaitMinutes": 15,
-        "staffMessage": "Please remain available.",
+        "calledLocation": null,
         "lastUpdatedAt": "2026-11-05T14:32:00Z"
       }
 
@@ -738,8 +737,8 @@
         elements.estimatedWaitRow.classList.add("hidden");
       }
 
-      if (ticket.staffMessage && String(ticket.staffMessage).trim()) {
-        elements.staffMessage.textContent = ticket.staffMessage;
+      if (ticket.calledLocation && String(ticket.calledLocation).trim()) {
+        elements.staffMessage.textContent = "Please report to " + ticket.calledLocation + ".";
         elements.staffMessagePanel.classList.remove("hidden");
       } else {
         elements.staffMessagePanel.classList.add("hidden");

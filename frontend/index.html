@@ -699,7 +699,11 @@
           <option value="N9">N9 · Medical</option>
         </select>
         <button id="refresh" type="button">Refresh tickets</button>
+        <label for="callLocation">Reporting location</label>
+        <input id="callLocation" type="text" maxlength="100" placeholder="Room or desk">
+        <button id="callNext" type="button" disabled>Call Next</button>
       </div>
+      <p id="callResult" role="status">Choose a department and enter a reporting location.</p>
       <p id="identity" class="muted"></p>
       <p id="status" role="status">Open this page through Firepit to read Tickets.</p>
       <div class="table-wrap">
@@ -4888,12 +4892,24 @@
   const status = document.getElementById("status");
   const identity = document.getElementById("identity");
   const tbody = document.getElementById("tickets");
+  const callNext = document.getElementById("callNext");
+  const callLocation = document.getElementById("callLocation");
+  const callResult = document.getElementById("callResult");
+  let busy = false;
+
+  function updateControls() {
+    refresh.disabled = busy;
+    department.disabled = busy;
+    callLocation.disabled = busy;
+    callNext.disabled = busy || !refreshedAt || !department.value || !callLocation.value.trim();
+  }
   let tickets = [];
   let refreshedAt = null;
   let emptyQueueDetail = "";
 
-  async function readJson(url, signal) {
+  async function readJson(url, signal, method = "GET") {
     const response = await fetch(url, {
+      method,
       credentials: "include",
       cache: "no-store",
       headers: { Accept: "application/json;odata=verbose" },
@@ -4973,7 +4989,9 @@
   }
 
   async function loadQueue() {
-    refresh.disabled = true;
+    if (busy) return;
+    busy = true;
+    updateControls();
     tickets = [];
     refreshedAt = null;
     emptyQueueDetail = "";
@@ -5000,12 +5018,89 @@
           : error.message;
     } finally {
       clearTimeout(timeout);
-      refresh.disabled = false;
+      busy = false;
+      updateControls();
+    }
+  }
+
+  async function claimNextTicket() {
+    if (callNext.disabled) return;
+    const selectedDepartment = department.value;
+    const location = callLocation.value.trim();
+    busy = true;
+    updateControls();
+    callResult.textContent = "Checking the oldest Waiting ticket…";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    let updateStarted = false;
+    try {
+      const url = new URL(itemsUrl);
+      url.searchParams.set("$select", "Id,Title,Department,Status,JoinedAt,FirstCalledAt,CallCount");
+      url.searchParams.set("$filter", "Status eq 'Waiting' and Department eq '" + selectedDepartment + "'");
+      url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
+      url.searchParams.set("$top", "1");
+      const page = await readJson(url.href, controller.signal);
+      if (!Array.isArray(page.results)) throw new Error("Unexpected SharePoint queue response.");
+      const ticket = page.results[0];
+      if (!ticket) {
+        callResult.textContent = "No Waiting tickets in " + selectedDepartment + ".";
+        return;
+      }
+
+      const etag = ticket.__metadata?.etag;
+      const id = Number(ticket.Id);
+      if (!etag || etag === "*" || !Number.isSafeInteger(id) || id < 1 ||
+          ticket.Department !== selectedDepartment || ticket.Status !== "Waiting") {
+        throw new Error("SharePoint did not provide a valid Waiting ticket version.");
+      }
+      const context = await readJson(site + "/_api/contextinfo", controller.signal, "POST");
+      const digest = context.GetContextWebInformation?.FormDigestValue;
+      if (!digest) throw new Error("SharePoint did not provide a request digest.");
+
+      const now = new Date().toISOString();
+      updateStarted = true;
+      const result = await fetch(itemsUrl.href + "(" + id + ")", {
+        method: "POST",
+        credentials: "include",
+        signal: controller.signal,
+        headers: {
+          Accept: "application/json;odata=verbose",
+          "Content-Type": "application/json;odata=nometadata",
+          "X-RequestDigest": digest,
+          "X-HTTP-Method": "MERGE",
+          "IF-MATCH": etag
+        },
+        body: JSON.stringify({
+          Status: "Called",
+          FirstCalledAt: ticket.FirstCalledAt || now,
+          LastCalledAt: now,
+          CalledLocation: location,
+          CallCount: (Number(ticket.CallCount) || 0) + 1,
+          NotificationStatus: "Pending"
+        })
+      });
+      if (result.status === 412) {
+        callResult.textContent = "Another update changed this ticket. Check the refreshed queue before calling again.";
+      } else if (result.status === 204) {
+        callResult.textContent = (ticket.Title || "#" + id) + " called to " + location + ". Email status: Pending.";
+      } else {
+        callResult.textContent = "SharePoint did not confirm the call (HTTP " + result.status + "). Check the ticket before trying again.";
+      }
+    } catch (error) {
+      callResult.textContent = updateStarted
+        ? "The call result is uncertain. Check the ticket in SharePoint before trying again."
+        : error.message;
+    } finally {
+      clearTimeout(timeout);
+      busy = false;
+      await loadQueue();
     }
   }
 
   refresh.addEventListener("click", loadQueue);
-  department.addEventListener("change", render);
+  department.addEventListener("change", () => { render(); updateControls(); });
+  callLocation.addEventListener("input", updateControls);
+  callNext.addEventListener("click", claimNextTicket);
   status.textContent = "Dashboard script ready. Select Refresh tickets to check SharePoint.";
   if (location.protocol !== "file:") loadQueue();
 })();
