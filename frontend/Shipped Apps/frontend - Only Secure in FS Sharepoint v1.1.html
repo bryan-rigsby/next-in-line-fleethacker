@@ -1,0 +1,181 @@
+<!--WFC-MANIFEST:eyJ2ZXJzaW9uIjoxLCJwcm9qZWN0IjoiZnJvbnRlbmQiLCJnZW5lcmF0ZWQiOiIyMDI2LTExLTA1VDEzOjU2OjAyLjkwNFoiLCJpbmRleCI6ImluZGV4Lmh0bWwiLCJmaWxlcyI6W10sInNoaXBwaW5nIjp7InNjaGVtYSI6MSwiY29tcGlsZXJTaGEyNTYiOiI4NDAzODVlNzcyMGU4YTE1NGU3ZGYyZjRjZjI4MGNmMjc5YzJkYWI2ZTJkYzQ4NDU2MGIzZGNlMDAyMWFkZjA0IiwidGFyZ2V0Ijoic2hhcmVwb2ludCIsIm1vZGUiOiJzaGlwcGVkIiwic2VjdXJpdHlIZWFkZXJzIjpmYWxzZSwicGF5bG9hZFNoYTI1NiI6ImE3ZjUxMjU3NzM1Mzg3MDE3ZjM4MTI5M2YxNmY0MTc5ZjA5YzVhZTE1ZjgwMzM4OWY2ZDQ3MmJiYTUyMjI2MTIiLCJyZWNvcmRTaGEyNTYiOiI3NDY3OTU4YTYzNTQ3ZTRhY2M2NDIwNTZkNDJkMTE3ZmY1NzBlYmRlZWRhNWIwZGY2ZTM2MDRlYTUwMjczMWFlIn19-->
+<!doctype html>
+<html lang="en">
+<head><meta name="app-version" content="1.1">
+<!-- <script src="devconsole.js"></script> -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Next in Line | NRC Houston Staff Queue</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f1f5f9; color: #182c45; font: 16px/1.5 system-ui, sans-serif; }
+    header { background: #0a2240; color: white; padding: 1rem max(1rem, calc((100% - 1100px) / 2)); border-bottom: 4px solid #eab308; }
+    header p { margin: 0; color: #dbe7f6; }
+    h1 { margin: 0; font-size: 1.6rem; }
+    main { max-width: 1132px; margin: 1.5rem auto; padding: 0 1rem; }
+    section { padding: 1.25rem; background: white; border: 1px solid #ccd8e5; border-radius: .75rem; }
+    .controls { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+    label { font-weight: 700; }
+    select, button { font: inherit; padding: .6rem .8rem; border-radius: .4rem; max-width: 100%; }
+    select { background: white; border: 1px solid #64748b; color: inherit; }
+    button { background: #184f80; border: 1px solid #184f80; color: white; cursor: pointer; }
+    button:disabled { opacity: .65; cursor: wait; }
+    [role="status"] { padding: .7rem; background: #edf4fa; border-radius: .4rem; }
+    [data-error="true"] { background: #fff0ed; color: #861f1b; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; min-width: 540px; border-collapse: collapse; }
+    th, td { text-align: left; padding: .65rem; border-bottom: 1px solid #dbe4ee; }
+    th { background: #eef3f8; }
+    .muted { color: #425872; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NRC Houston Staff Queue</h1>
+    <p>Next in Line · Read-only SharePoint preview</p>
+  </header>
+  <main>
+    <section aria-label="Waiting tickets">
+      <div class="controls">
+        <label for="department">Department</label>
+        <select id="department">
+          <option value="">All departments</option>
+          <option value="N00">N00 · Career Counselor / ESO</option>
+          <option value="N00C">N00C · Command Services</option>
+          <option value="N1">N1 · Manpower</option>
+          <option value="N3">N3 · Operations</option>
+          <option value="N4">N4 · Supply</option>
+          <option value="N5">N5 · Mobilization</option>
+          <option value="N6">N6 · Information Technology</option>
+          <option value="N7">N7 · Training</option>
+          <option value="N9">N9 · Medical</option>
+        </select>
+        <button id="refresh" type="button">Refresh tickets</button>
+      </div>
+      <p id="identity" class="muted"></p>
+      <p id="status" role="status">Open this page through Firepit to read Tickets.</p>
+      <div class="table-wrap">
+        <table aria-label="Waiting tickets, oldest first">
+          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Joined</th></tr></thead>
+          <tbody id="tickets"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+<script>
+(function () {
+  "use strict";
+
+  const site = "https://flankspeed.sharepoint-mil.us.mcas-gov.us/sites/NRCHOUSTONSTAFFONLY";
+  const itemsUrl = new URL(site + "/_api/web/lists/getbytitle('Tickets')/items");
+  const department = document.getElementById("department");
+  const refresh = document.getElementById("refresh");
+  const status = document.getElementById("status");
+  const identity = document.getElementById("identity");
+  const tbody = document.getElementById("tickets");
+  let tickets = [];
+  let refreshedAt = null;
+
+  async function readJson(url, signal) {
+    const response = await fetch(url, {
+      credentials: "include",
+      cache: "no-store",
+      headers: { Accept: "application/json;odata=verbose" },
+      signal
+    });
+    if (response.status === 401 || response.status === 403) {
+      throw new Error("SharePoint denied access. Open this page through Firepit as a staff member with Tickets read permission.");
+    }
+    if (!response.ok) throw new Error("SharePoint returned HTTP " + response.status + ". Check the Tickets list and column internal names.");
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.includes("json")) throw new Error("SharePoint returned a non-JSON page. Check the Firepit session.");
+    const payload = await response.json();
+    return payload.d || payload;
+  }
+
+  async function readTickets(signal) {
+    const url = new URL(itemsUrl);
+    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,JoinedAt");
+    url.searchParams.set("$filter", "Status eq 'Waiting'");
+    url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
+    url.searchParams.set("$top", "100");
+    const rows = [];
+    const seenPages = new Set();
+    let next = url;
+
+    while (next) {
+      if (next.origin !== itemsUrl.origin || next.pathname !== itemsUrl.pathname || seenPages.has(next.href)) {
+        throw new Error("SharePoint returned an unexpected paging link.");
+      }
+      seenPages.add(next.href);
+      const page = await readJson(next.href, signal);
+      if (!Array.isArray(page.results)) throw new Error("SharePoint returned an unexpected Tickets response.");
+      rows.push(...page.results);
+      next = page.__next ? new URL(page.__next, next) : null;
+    }
+    return rows;
+  }
+
+  function render() {
+    tbody.replaceChildren();
+    if (!refreshedAt) return;
+    const visible = tickets.filter(row => !department.value || row.Department === department.value);
+    for (const row of visible) {
+      const tr = document.createElement("tr");
+      const joined = row.JoinedAt ? new Date(row.JoinedAt) : null;
+      const values = [
+        row.Title || "#" + row.Id,
+        row.Department,
+        [row.RankRate, row.SailorName].filter(Boolean).join(" "),
+        row.Service,
+        joined && Number.isFinite(joined.getTime()) ? joined.toLocaleString() : "—"
+      ];
+      for (const value of values) {
+        const td = document.createElement("td");
+        td.textContent = value || "—";
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    status.dataset.error = "false";
+    status.textContent = visible.length + " waiting · Last refreshed " + refreshedAt.toLocaleTimeString();
+  }
+
+  async function loadQueue() {
+    refresh.disabled = true;
+    tickets = [];
+    refreshedAt = null;
+    identity.textContent = "";
+    render();
+    status.dataset.error = "false";
+    status.textContent = "Reading SharePoint Tickets…";
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const user = await readJson(site + "/_api/web/currentuser?$select=Title", controller.signal);
+      tickets = await readTickets(controller.signal);
+      identity.textContent = user.Title ? "Signed in as " + user.Title : "";
+      refreshedAt = new Date();
+      render();
+    } catch (error) {
+      status.dataset.error = "true";
+      status.textContent = error.name === "AbortError"
+        ? "SharePoint did not respond in time. Try Refresh tickets again."
+        : error instanceof TypeError
+          ? "The browser could not reach SharePoint. Open the published Firepit page and check its SharePoint API access."
+          : error.message;
+    } finally {
+      clearTimeout(timeout);
+      refresh.disabled = false;
+    }
+  }
+
+  refresh.addEventListener("click", loadQueue);
+  department.addEventListener("change", render);
+  if (location.protocol !== "file:") loadQueue();
+})();
+</script>
+<!-- <script src="testRecorder.js"></script> -->
+</body>
+</html>

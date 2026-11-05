@@ -1,6 +1,14 @@
+# Live staff preview
+
+Ship `index.html` through Forge for SharePoint and load it on a staff-only Firepit test page. It uses the same authenticated browser request approach as the connection test and reads Waiting rows from Tickets on NRCHOUSTONSTAFFONLY. Column internal names are assumed to match the setup guide. Verify with a fresh synthetic N00 response and an ordinary staff account. Use Refresh tickets after each test submission.
+
+Tickets are held in memory and cleared on refresh errors. The department picker changes the view, while SharePoint determines which records the signed-in user may access. Deploy the preview only where authorized staff may see those records. Per-staff assignments are planned for V2.
+
+Use the existing demo page below for practice with local synthetic data.
+
 # Next in Line — staff dashboard
 
-Open `index.html` in Chrome on macOS, or open this frontend folder in Forge and select Code -> index.html. Reload/reopen it in Forge after external edits so an old editor buffer does not overwrite changes.
+Open `staff-demo.html` in Chrome on macOS, or open this frontend folder in Forge and select Code -> staff-demo.html. Reload/reopen it in Forge after external edits so an old editor buffer does not overwrite changes.
 
 ## Current behavior
 

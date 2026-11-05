@@ -90,3 +90,7 @@ Do not promise that editing a Services list updates Microsoft Forms questions or
 ## Deferred
 
 Embedding full Forms/Power Automate designers, programmatic form schema editing, automatic deployment/provisioning across NRCs, and automatic tenant-wide role management. These are not prerequisites for useful administration.
+
+## Staff ticket assignments
+
+Use a dedicated single-person AssignedTo field. Keep it separate from HandledBy, which records who acted on the ticket. Confirm whether ownership is assigned per ticket or by department and who handles unassigned and reassigned tickets. Resolve the signed-in SharePoint identity to a stable user ID. Show each staff member their assigned tickets and verify SharePoint permissions or an authorized data operation prevents direct reads of other staff members' tickets. Test with two ordinary staff accounts, including assignment changes, unassigned tickets, and direct list/API access.
