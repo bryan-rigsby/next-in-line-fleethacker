@@ -1,0 +1,10 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const {apply}=require('../frontend/staff-queue-workflow.js');
+const ticket=()=>({id:'1',status:'Waiting',email:'demo@example.invalid',joinedAt:1,calledAt:null,servedAt:null,doneAt:null});
+test('valid sequence retains exact timestamps and prevents duplicate calls',()=>{const t=ticket();apply(t,'call',{room:'2430',message:'Report to 2430',now:100});assert.equal(t.notification.status,'Pending');assert.throws(()=>apply(t,'call',{room:'X',message:'X'}));apply(t,'serve',{now:200});apply(t,'done',{now:300});assert.deepEqual([t.status,t.calledAt,t.servedAt,t.doneAt],['Done',100,200,300]);assert.equal(t.events.length,3);});
+test('done and serving cannot fabricate earlier states or timestamps',()=>{const t=ticket();assert.throws(()=>apply(t,'done'));assert.throws(()=>apply(t,'serve'));assert.equal(t.doneAt,null);assert.equal(t.calledAt,null);assert.equal(t.events,undefined);});
+test('notification failure/retry/success leaves queue status untouched',()=>{const t=ticket();apply(t,'call',{room:'2430',message:'Report',now:100});apply(t,'email-failed');assert.equal(t.status,'Called');apply(t,'email-retry');assert.equal(t.notification.attempts,2);apply(t,'email-sent');assert.equal(t.notification.status,'Simulated success');assert.equal(t.status,'Called');assert.throws(()=>apply(t,'email-sent'));});
+test('invalid call is rejected before ticket mutation',()=>{const t=ticket();const before=JSON.stringify(t);assert.throws(()=>apply(t,'call',{room:'',message:'Report'}));assert.equal(JSON.stringify(t),before);});
+test('missing recipient is a visible notification failure; ticket can still be served',()=>{const t=ticket();t.email='';apply(t,'call',{room:'2430',message:'Report'});assert.equal(t.notification.status,'Failed');assert.throws(()=>apply(t,'email-retry'));apply(t,'serve');assert.equal(t.status,'Serving');});
+test('no-show only applies to Called',()=>{const t=ticket();assert.throws(()=>apply(t,'no-show'));apply(t,'call',{room:'2430',message:'Report'});apply(t,'no-show',{now:500});assert.equal(t.status,'NoShow');assert.equal(t.servedAt,null);});
