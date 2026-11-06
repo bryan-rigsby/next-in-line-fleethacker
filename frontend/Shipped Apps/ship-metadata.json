@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "currentVersion": "1.13",
+  "currentVersion": "1.14",
   "releases": [
     {
       "version": "1.0",
@@ -123,10 +123,19 @@
       "version": "1.13",
       "releaseType": "feature",
       "releaseTypeLabel": "Minor feature add",
-      "filename": "frontend - Only Secure in FS Sharepoint-current.html",
+      "filename": "frontend - Only Secure in FS Sharepoint v1.13.html",
       "hash": "627b031375e167ea19681a21c40c86633b57a79ff7ca46366d4336931363d659",
       "shipTarget": "sharepoint",
       "shippedAt": "2026-11-06T14:03:53.742Z"
+    },
+    {
+      "version": "1.14",
+      "releaseType": "feature",
+      "releaseTypeLabel": "Minor feature add",
+      "filename": "frontend - Only Secure in FS Sharepoint-current.html",
+      "hash": "5cdf4a3d6cfcd3c327129dd5465ee5357fe1f84b748743fef29ba9a39b1f2196",
+      "shipTarget": "sharepoint",
+      "shippedAt": "2026-11-06T16:31:32.594Z"
     }
   ]
 }

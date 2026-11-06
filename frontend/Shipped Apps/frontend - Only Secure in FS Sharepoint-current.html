@@ -1,7 +1,7 @@
-<!--WFC-MANIFEST:eyJ2ZXJzaW9uIjoxLCJwcm9qZWN0IjoiZnJvbnRlbmQiLCJnZW5lcmF0ZWQiOiIyMDI2LTExLTA2VDE0OjAzOjUxLjAyNloiLCJpbmRleCI6ImluZGV4Lmh0bWwiLCJmaWxlcyI6W10sInNoaXBwaW5nIjp7InNjaGVtYSI6MSwiY29tcGlsZXJTaGEyNTYiOiI4NDAzODVlNzcyMGU4YTE1NGU3ZGYyZjRjZjI4MGNmMjc5YzJkYWI2ZTJkYzQ4NDU2MGIzZGNlMDAyMWFkZjA0IiwidGFyZ2V0Ijoic2hhcmVwb2ludCIsIm1vZGUiOiJzaGlwcGVkIiwic2VjdXJpdHlIZWFkZXJzIjpmYWxzZSwicGF5bG9hZFNoYTI1NiI6IjFhZmRlMWIzYjY2NTk1ZGM5NjY3MWZjMzNkZmQ0NjU2YmFhZjE1ZmEwOTU0YzMyNjNjYjY1ODYzOTUyOGM3YzgiLCJyZWNvcmRTaGEyNTYiOiIwZjYyM2M5YTcwZGUyNDVkYjhiODU0YTU2NjJjYzc0MDA1ZTUwYTc4ZjI2NTE1Zjg3MGQyODIxMDg3NmFkYWY2In19-->
+<!--WFC-MANIFEST:eyJ2ZXJzaW9uIjoxLCJwcm9qZWN0IjoiZnJvbnRlbmQiLCJnZW5lcmF0ZWQiOiIyMDI2LTExLTA2VDE2OjMxOjMwLjA0MVoiLCJpbmRleCI6ImluZGV4Lmh0bWwiLCJmaWxlcyI6W10sInNoaXBwaW5nIjp7InNjaGVtYSI6MSwiY29tcGlsZXJTaGEyNTYiOiI4NDAzODVlNzcyMGU4YTE1NGU3ZGYyZjRjZjI4MGNmMjc5YzJkYWI2ZTJkYzQ4NDU2MGIzZGNlMDAyMWFkZjA0IiwidGFyZ2V0Ijoic2hhcmVwb2ludCIsIm1vZGUiOiJzaGlwcGVkIiwic2VjdXJpdHlIZWFkZXJzIjpmYWxzZSwicGF5bG9hZFNoYTI1NiI6IjEzNTYwMmVmOTBiODZiMDM3NWQ1NmU3MzUxN2I0ZWI0NjExNmI2ZGZkMzBjZDk2NTAxNzRhMWZlMzI2ZjJlZTMiLCJyZWNvcmRTaGEyNTYiOiIwZTcxM2U3Y2ZkODc1NDYzNjU1YmFkZGYyZmNlOGM5Mzg1ZDhiYWRhOTdiN2MwOTY0Mjk5Njc2MDhmNTY4ZDQ3In19-->
 <!doctype html>
 <html lang="en">
-<head><meta name="app-version" content="1.13">
+<head><meta name="app-version" content="1.14">
 <!-- <script src="devconsole.js"></script> -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -773,7 +773,7 @@
       <p id="status" role="status">Open this page through Firepit to read Tickets.</p>
       <div class="table-wrap">
         <table class="data-table" aria-label="Waiting tickets, oldest first">
-          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Joined</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
+          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Notes</th><th scope="col">Joined</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
           <tbody id="tickets"></tbody>
         </table>
       </div>
@@ -4110,7 +4110,7 @@
 
   async function readTickets(signal) {
     const url = new URL(itemsUrl);
-    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,JoinedAt,Status");
+    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,Reason,JoinedAt,Status");
     url.searchParams.set("$filter", "Status eq 'Waiting' or Status eq 'Called' or Status eq 'Serving'");
     url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
     url.searchParams.set("$top", "100");
@@ -4420,6 +4420,7 @@
         row.Department,
         [row.RankRate, row.SailorName].filter(Boolean).join(" "),
         row.Service,
+        row.Reason,
         joined && Number.isFinite(joined.getTime()) ? joined.toLocaleString() : "—",
         row.Status
       ];

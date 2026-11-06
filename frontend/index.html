@@ -783,7 +783,7 @@
       <p id="status" role="status">Open this page through Firepit to read Tickets.</p>
       <div class="table-wrap">
         <table class="data-table" aria-label="Waiting tickets, oldest first">
-          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Joined</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
+          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Notes</th><th scope="col">Joined</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
           <tbody id="tickets"></tbody>
         </table>
       </div>
@@ -4120,7 +4120,7 @@
 
   async function readTickets(signal) {
     const url = new URL(itemsUrl);
-    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,JoinedAt,Status");
+    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,Reason,JoinedAt,Status");
     url.searchParams.set("$filter", "Status eq 'Waiting' or Status eq 'Called' or Status eq 'Serving'");
     url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
     url.searchParams.set("$top", "100");
@@ -4430,6 +4430,7 @@
         row.Department,
         [row.RankRate, row.SailorName].filter(Boolean).join(" "),
         row.Service,
+        row.Reason,
         joined && Number.isFinite(joined.getTime()) ? joined.toLocaleString() : "—",
         row.Status
       ];
