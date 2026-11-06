@@ -1,7 +1,7 @@
-<!--WFC-MANIFEST:eyJ2ZXJzaW9uIjoxLCJwcm9qZWN0IjoiZnJvbnRlbmQiLCJnZW5lcmF0ZWQiOiIyMDI2LTExLTA1VDE2OjIxOjU0LjQzN1oiLCJpbmRleCI6ImluZGV4Lmh0bWwiLCJmaWxlcyI6W10sInNoaXBwaW5nIjp7InNjaGVtYSI6MSwiY29tcGlsZXJTaGEyNTYiOiI4NDAzODVlNzcyMGU4YTE1NGU3ZGYyZjRjZjI4MGNmMjc5YzJkYWI2ZTJkYzQ4NDU2MGIzZGNlMDAyMWFkZjA0IiwidGFyZ2V0Ijoic2hhcmVwb2ludCIsIm1vZGUiOiJzaGlwcGVkIiwic2VjdXJpdHlIZWFkZXJzIjpmYWxzZSwicGF5bG9hZFNoYTI1NiI6ImRlODlhMDE4NTM1ZDcyYzZmZDYwMGY0ODE0NDRiMTIyNTYwNzYyNTRiOTYwOThhNjVkZmI1ODYyMzk3YmZmZjkiLCJyZWNvcmRTaGEyNTYiOiI5YWUwNjMxZmQxMzI3MDk3MWY4MDRjNjQ5OGUwMTM2ZTgzOTRhYmNlYWI3NTA5MjZmZWVmZTVkZTE1OTY2YWNlIn19-->
+<!--WFC-MANIFEST:eyJ2ZXJzaW9uIjoxLCJwcm9qZWN0IjoiZnJvbnRlbmQiLCJnZW5lcmF0ZWQiOiIyMDI2LTExLTA2VDE0OjAzOjUxLjAyNloiLCJpbmRleCI6ImluZGV4Lmh0bWwiLCJmaWxlcyI6W10sInNoaXBwaW5nIjp7InNjaGVtYSI6MSwiY29tcGlsZXJTaGEyNTYiOiI4NDAzODVlNzcyMGU4YTE1NGU3ZGYyZjRjZjI4MGNmMjc5YzJkYWI2ZTJkYzQ4NDU2MGIzZGNlMDAyMWFkZjA0IiwidGFyZ2V0Ijoic2hhcmVwb2ludCIsIm1vZGUiOiJzaGlwcGVkIiwic2VjdXJpdHlIZWFkZXJzIjpmYWxzZSwicGF5bG9hZFNoYTI1NiI6IjFhZmRlMWIzYjY2NTk1ZGM5NjY3MWZjMzNkZmQ0NjU2YmFhZjE1ZmEwOTU0YzMyNjNjYjY1ODYzOTUyOGM3YzgiLCJyZWNvcmRTaGEyNTYiOiIwZjYyM2M5YTcwZGUyNDVkYjhiODU0YTU2NjJjYzc0MDA1ZTUwYTc4ZjI2NTE1Zjg3MGQyODIxMDg3NmFkYWY2In19-->
 <!doctype html>
 <html lang="en">
-<head><meta name="app-version" content="1.3">
+<head><meta name="app-version" content="1.13">
 <!-- <script src="devconsole.js"></script> -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -547,7 +547,7 @@
       min-height: calc(100vh - 64px);
       padding: 1.5rem;
       display: grid;
-      grid-template-columns: 1.3fr 1fr;
+      grid-template-columns: minmax(0, 1fr) clamp(27rem, 30vw, 29rem);
       gap: 1.5rem;
     }
 
@@ -575,6 +575,7 @@
       text-transform: uppercase;
     }
 
+    .tv-call-card > :first-child { min-width:0 }
     .tv-call-card {
       background-color: #1e293b;
       border-left: 8px solid #22c55e;
@@ -587,9 +588,12 @@
     }
 
     .tv-ticket-num {
-      font-size: 2.5rem;
+      font-size:clamp(.95rem, 1.65vw, 1.5rem);
       font-weight: 900;
       color: #ffffff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .tv-call-details {
@@ -648,15 +652,14 @@
   <!-- Top Navigation -->
   <header class="top-bar">
     <div class="brand-title">
-      <span id="headerNrcName">NRC Drill Weekend Customer Service</span>
+      <span id="headerNrcName">NRC Houston Customer Service</span>
       <span class="sync-badge">Staff portal</span>
     </div>
     <nav class="mode-switcher" aria-label="View Switcher">
-      <button type="button" class="mode-btn active" id="navLiveBtn">Staff Queue</button>
-      <button type="button" class="mode-btn" id="navCustomerBtn">Customer Portal</button>
-      <button type="button" class="mode-btn" id="navStaffBtn">Staff Tools Demo</button>
+      <button type="button" class="mode-btn active" id="navStaffBtn">Department Queue</button>
+      <button type="button" class="mode-btn" id="navMetricsBtn">Metrics</button>
       <button type="button" class="mode-btn" id="navTvBtn">Waiting Room TV</button>
-      <button type="button" class="mode-btn" id="navPlacardBtn">Print QR Placard</button>
+      <button type="button" class="mode-btn" id="navConfigBtn">Configuration</button>
     </nav>
   </header>
 
@@ -666,17 +669,82 @@
     <button type="button" class="btn btn-sm btn-secondary" id="dismissAlertBtn">Dismiss</button>
   </div>
 
-  <!-- Main Application Viewport -->
-  <main id="appViewport" hidden></main>
-  <p id="demoNotice" hidden role="status" style="padding:.6rem 1rem;background:#fff4cc;color:#573800">
-    Local demo. This view uses sample data. Use Staff Queue for SharePoint tickets.
-  </p>
-  <main id="liveQueueView" style="max-width:1132px;margin:1.5rem auto;padding:0 1rem">
-    <section class="card" aria-label="Waiting tickets">
-      <h1>SharePoint staff queue</h1>
+  <main id="metricsView" class="container-wide" hidden>
+    <section class="card">
+      <h1>Queue Metrics</h1>
+      <div class="controls">
+        <div class="metrics-field">
+          <label for="metricsStart">From</label>
+          <input id="metricsStart" type="date">
+        </div>
+        <div class="metrics-field">
+          <label for="metricsEnd">Through</label>
+          <input id="metricsEnd" type="date">
+        </div>
+        <button id="metricsRefresh" type="button" class="btn btn-primary">Refresh metrics</button>
+      </div>
+      <p class="metrics-help">Dates are based on when a ticket joined the queue, in this browser’s time zone.</p>
+      <p id="metricsStatus" role="status"></p>
+      <div class="metrics-charts">
+        <section><h2>Tickets by status</h2><div id="metricsStatusChart"></div></section>
+        <section><h2>Average wait by department</h2><div id="metricsWaitChart"></div></section>
+        <section><h2>Sailors helped by staff member</h2>
+          <p>Completed tickets, grouped by who started service.</p>
+          <div id="metricsStaffChart"></div>
+          <table class="data-table" aria-label="Completed tickets by staff member" id="metricsStaffTable" hidden>
+            <thead><tr><th scope="col">Staff member</th><th scope="col">Completed</th></tr></thead>
+            <tbody id="metricsStaffRows"></tbody>
+          </table>
+        </section>
+      </div>
+      <h2 class="metrics-table-heading">Ticket breakdown</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Department</th><th>Service</th><th>Status</th><th>Tickets</th><th>Average time to first call</th></tr></thead>
+          <tbody id="metricsRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <main id="configView" class="container-wide" hidden>
+    <section class="card" aria-labelledby="configHeading">
+      <h1 id="configHeading">Queue Configuration</h1>
+      <p>Use the Microsoft editors for changes to the form, list, and flows. Access depends on your permissions in each tool.</p>
+      <h2>Reporting locations</h2>
+      <p>In Site contents, create a list named <strong>QueueConfiguration</strong>. Add a single line of text column named <strong>ReportingRoom</strong>. Create one row per department code, using <strong>Title</strong> for the code. Give dashboard users read access and maintainers edit access.</p>
+      <p id="configStatus" role="status"></p>
+      <ul id="configuredRooms"></ul>
+      <h2>Tickets list</h2>
+      <p><a id="configTicketsLink" target="_blank" rel="noopener noreferrer">Open the SharePoint site</a>, then open <strong>Site contents → Tickets</strong>. Use <strong>List settings</strong> to review columns and choice values. Coordinate column changes with the dashboard and any flow that reads or writes those fields.</p>
+      <h2>Intake form</h2>
+      <p>In Microsoft Forms, open the intake form from your forms or the owning group. Update the questions, department choices, and branching. Use Preview to test each changed branch.</p>
+      <h2>Power Automate</h2>
+      <p>Open the intake flow and review how form answers map to Tickets fields. If department choices changed, update the matching cases and the dashboard department codes. Submit a test response, check the resulting ticket, then call it to verify the notification.</p>
+    </section>
+  </main>
+  <main id="tvView" hidden>
+    <div class="tv-screen" aria-label="Waiting Room TV Display">
+      <section class="tv-panel">
+        <h1 class="tv-heading">Now Calling — Please Report</h1>
+        <p id="tvStatus" role="status"></p>
+        <div id="tvCalls"></div>
+      </section>
+      <section class="tv-panel">
+        <h2 class="tv-heading">Waiting by Department</h2>
+        <div id="tvCounts"></div>
+      </section>
+    </div>
+  </main>
+  <main id="liveQueueView" class="container-wide">
+    <section class="card live-department" aria-labelledby="departmentQueueHeading">
+      <header class="queue-heading">
+        <h1 id="departmentQueueHeading">Department Queue</h1>
+        <span id="identity" class="muted"></span>
+      </header>
+      <p id="queueAlert" role="alert" hidden></p>
       <div class="controls">
         <label for="department">Department</label>
-        <select id="department">
+        <select id="department" class="form-select">
           <option value="">All departments</option>
           <option value="N00">N00 · Career Counselor / ESO</option>
           <option value="N00C">N00C · Command Services</option>
@@ -688,29 +756,110 @@
           <option value="N7">N7 · Training</option>
           <option value="N9">N9 · Medical</option>
         </select>
-        <button id="refresh" type="button">Refresh tickets</button>
+        <button id="refresh" class="btn btn-secondary btn-sm" type="button">Refresh tickets</button>
         <label for="callLocation">Reporting location</label>
-        <input id="callLocation" type="text" maxlength="100" placeholder="Room or desk">
-        <button id="callNext" type="button" disabled>Call Next</button>
+        <select id="callLocation" class="form-select">
+          <option value="">Select reporting location</option>
+        </select>
+        <button id="callNext" class="btn btn-success" type="button" disabled>Call Next</button>
+        <button id="clearQueue" class="btn btn-secondary" type="button" disabled>Clear queue</button>
       </div>
-      <p id="callResult" role="status">Choose a department and enter a reporting location.</p>
-      <p id="identity" class="muted"></p>
+      <div id="clearQueuePrompt" hidden>
+        <p id="clearQueueMessage"></p>
+        <button id="confirmClearQueue" class="btn btn-secondary" type="button">Confirm clear queue</button>
+        <button id="keepQueue" class="btn btn-secondary" type="button">Keep tickets</button>
+      </div>
+      <p id="callResult" role="status">Choose a department and select a reporting location.</p>
       <p id="status" role="status">Open this page through Firepit to read Tickets.</p>
       <div class="table-wrap">
-        <table aria-label="Waiting tickets, oldest first">
-          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Joined</th></tr></thead>
+        <table class="data-table" aria-label="Waiting tickets, oldest first">
+          <thead><tr><th scope="col">Ticket</th><th scope="col">Department</th><th scope="col">Sailor</th><th scope="col">Service</th><th scope="col">Joined</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead>
           <tbody id="tickets"></tbody>
         </table>
       </div>
     </section>
   </main>
   <style>
+    #metricsView > .card { border-top:4px solid var(--gold-500) }
+    #metricsView h1 { color:var(--navy-900); margin:0 0 1rem }
+    #metricsView .controls { display:flex; flex-wrap:wrap; align-items:end; gap:.75rem }
+    .metrics-field { display:grid; gap:.35rem }
+    .metrics-field label { font-weight:700 }
+    #metricsView .controls input,
+    #metricsView .controls button {
+      box-sizing:border-box;
+      height:44px;
+      width:224px;
+      margin:0;
+      border-radius:8px;
+      font:inherit;
+    }
+    #metricsView .controls input { background:white; color:var(--navy-900); border:2px solid #64748b; padding:0 .75rem }
+    #metricsView .controls button { min-height:44px; padding:0 .75rem; font-weight:700 }
+    .metrics-help { color:#475569; margin:.75rem 0 }
+    #metricsStatus { background:#edf4fb; color:#17365d; padding:.65rem .85rem; border-radius:6px }
+    #metricsStatus:empty { display:none }
+    #metricsStatus[data-error="true"] { background:#fff1f0; color:#861f1b }
+    #metricsView .table-wrap { overflow-x:auto }
+    #metricsView .table-wrap .data-table { min-width:560px }
+    .metrics-table-heading { font-size:1.1rem; margin:1.25rem 0 .6rem }
+    @media (max-width:600px) {
+      #metricsView .metrics-field,
+      #metricsView .controls input,
+      #metricsView .controls button { width:100% }
+    }
+    .metrics-charts { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%, 300px),1fr)); gap:1rem; margin:1rem 0 }
+    .metrics-charts section { background:#f1f5f9; border:1px solid #cbd5e1; border-top:3px solid #175ea8; border-radius:8px; padding:1rem }
+    .metrics-charts section + section { border-top-color:#08734e }
+    .metrics-charts h2 { margin:0 0 .75rem; font-size:1.1rem }
+    .metrics-bar { margin:.75rem 0 }
+    .metrics-bar label { display:block; font-weight:700 }
+    .metrics-bar progress { display:block; width:100%; height:1rem; accent-color:#175ea8 }
+    #metricsWaitChart progress { accent-color:#08734e }
+    #metricsStaffChart progress { accent-color:#67459a }
+    #metricsStaffChart label { overflow-wrap:anywhere }
+    #metricsStaffTable { width:100%; table-layout:fixed; margin-top:.75rem }
+    #metricsStaffTable th, #metricsStaffTable td { overflow-wrap:anywhere }
     #liveQueueView .controls { display:flex;flex-wrap:wrap;gap:.75rem;align-items:center }
-    #liveQueueView select, #liveQueueView button { font:inherit;padding:.55rem;max-width:100% }
+    #liveQueueView .live-department { border-top:4px solid var(--gold-500) }
+    .queue-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:.5rem 1rem }
+    #identity { margin-left:auto; font-weight:700 }
+    #queueAlert { background:#fff1f0; color:#861f1b; border:2px solid #b42318; border-radius:6px; padding:.65rem .85rem; font-weight:700 }
+    #liveQueueView h1, #liveQueueView h2 { color:var(--navy-900); margin:0 0 .8rem }
+    #liveQueueView .controls label { font-weight:700 }
+    #liveQueueView .controls input,
+    #liveQueueView .controls select,
+    #liveQueueView .controls button {
+      box-sizing: border-box;
+      flex: 0 1 14rem;
+      width: 14rem;
+      min-width: 0;
+      max-width: 100%;
+      height: 44px;
+      min-height: 44px;
+      max-height: 44px;
+      padding: 0 .75rem;
+      margin: 0;
+      font-size: .9rem;
+      line-height: 1.25;
+    }
+    #liveQueueView .controls button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #liveQueueView .controls select { width:190px; padding-right:1.75rem }
+    #liveQueueView .controls button { width:auto; padding-inline:.75rem; white-space:nowrap }
+    @media (max-width: 540px) {
+      #liveQueueView .controls label { flex-basis: 100%; }
+      #liveQueueView .controls input,
+      #liveQueueView .controls select,
+      #liveQueueView .controls button { flex-basis: 100%; width: 100%; }
+    }
     #liveQueueView .table-wrap { overflow-x:auto }
-    #liveQueueView table { width:100%;min-width:540px;border-collapse:collapse }
-    #liveQueueView th, #liveQueueView td { text-align:left;padding:.65rem;border-bottom:1px solid #dbe4ee }
-    #liveQueueView th { background:#eef3f8 }
+    #liveQueueView .data-table { min-width:540px }
+    #liveQueueView .live-department > [role="status"] { background:#f1f5f9; border-radius:6px; padding:.5rem .75rem }
+    #liveQueueView .btn:disabled { opacity:.55; cursor:not-allowed }
     #liveQueueView [data-error="true"] { color:#861f1b }
     [hidden] { display:none !important }
   </style>
@@ -721,252 +870,6 @@
   </div>
 
   <script>
-    /*************************************************************************
-     * 1. STANDALONE QR CODE GENERATOR (ISO/IEC 18004 Byte Mode, ECC Level L)
-     * Pure vanilla JS client-side QR matrix generator & SVG renderer.
-     * Supports URLs up to 154 bytes (Versions 1 to 7) with zero external APIs.
-     *************************************************************************/
-    const QRGenerator = (() => {
-      const VERSION_INFO = [
-        null,
-        { size: 21, dataBytes: 19, ecBytes: 7, align: [] },
-        { size: 25, dataBytes: 34, ecBytes: 10, align: [6, 18] },
-        { size: 29, dataBytes: 55, ecBytes: 15, align: [6, 22] },
-        { size: 33, dataBytes: 80, ecBytes: 20, align: [6, 26] },
-        { size: 37, dataBytes: 108, ecBytes: 26, align: [6, 30] },
-        { size: 41, dataBytes: 136, ecBytes: 18, blocks: 2, align: [6, 34] },
-        { size: 45, dataBytes: 156, ecBytes: 20, blocks: 2, align: [6, 22, 38] }
-      ];
-
-      // Galois Field GF(256) tables
-      const EXP = new Uint8Array(512);
-      const LOG = new Uint8Array(256);
-      (() => {
-        let x = 1;
-        for (let i = 0; i < 255; i++) {
-          EXP[i] = x;
-          LOG[x] = i;
-          x <<= 1;
-          if (x & 0x100) x ^= 0x11d;
-        }
-        for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
-      })();
-
-      function gfMul(a, b) {
-        return (a === 0 || b === 0) ? 0 : EXP[LOG[a] + LOG[b]];
-      }
-
-      function polyMul(p, q) {
-        const out = new Uint8Array(p.length + q.length - 1);
-        for (let i = 0; i < p.length; i++) {
-          for (let j = 0; j < q.length; j++) {
-            out[i + j] ^= gfMul(p[i], q[j]);
-          }
-        }
-        return out;
-      }
-
-      function getGeneratorPoly(degree) {
-        let g = new Uint8Array([1]);
-        for (let i = 0; i < degree; i++) {
-          g = polyMul(g, new Uint8Array([1, EXP[i]]));
-        }
-        return g;
-      }
-
-      function computeReedSolomon(data, ecLen) {
-        const gen = getGeneratorPoly(ecLen);
-        const msg = new Uint8Array(data.length + ecLen);
-        msg.set(data, 0);
-        for (let i = 0; i < data.length; i++) {
-          const coef = msg[i];
-          if (coef !== 0) {
-            for (let j = 0; j < gen.length; j++) {
-              msg[i + j] ^= gfMul(gen[j], coef);
-            }
-          }
-        }
-        return msg.slice(data.length);
-      }
-
-      function encodeDataBytes(text) {
-        const utf8 = new TextEncoder().encode(text);
-        let ver = 1;
-        while (ver <= 7 && utf8.length + 2 > VERSION_INFO[ver].dataBytes) {
-          ver++;
-        }
-        if (ver > 7) {
-          ver = 7;
-        }
-        const info = VERSION_INFO[ver];
-        const maxPayload = info.dataBytes - 2;
-        const bytes = utf8.slice(0, maxPayload);
-
-        const bits = [];
-        const pushBits = (val, len) => {
-          for (let i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1);
-        };
-
-        pushBits(0b0100, 4); // Byte mode indicator
-        pushBits(bytes.length, 8);
-        for (let i = 0; i < bytes.length; i++) pushBits(bytes[i], 8);
-
-        const maxBits = info.dataBytes * 8;
-        for (let i = 0; i < 4 && bits.length < maxBits; i++) bits.push(0);
-        while (bits.length % 8 !== 0) bits.push(0);
-
-        const codewords = new Uint8Array(info.dataBytes);
-        for (let i = 0; i < bits.length / 8; i++) {
-          let b = 0;
-          for (let j = 0; j < 8; j++) b = (b << 1) | bits[i * 8 + j];
-          codewords[i] = b;
-        }
-        let padToggle = true;
-        for (let i = bits.length / 8; i < info.dataBytes; i++) {
-          codewords[i] = padToggle ? 0xec : 0x11;
-          padToggle = !padToggle;
-        }
-
-        let finalBytes = [];
-        if (!info.blocks || info.blocks === 1) {
-          const ec = computeReedSolomon(codewords, info.ecBytes);
-          finalBytes = [...codewords, ...ec];
-        } else {
-          const half = info.dataBytes / 2;
-          const b1 = codewords.slice(0, half);
-          const b2 = codewords.slice(half);
-          const ec1 = computeReedSolomon(b1, info.ecBytes);
-          const ec2 = computeReedSolomon(b2, info.ecBytes);
-          for (let i = 0; i < half; i++) finalBytes.push(b1[i], b2[i]);
-          for (let i = 0; i < info.ecBytes; i++) finalBytes.push(ec1[i], ec2[i]);
-        }
-
-        return { ver, size: info.size, align: info.align, finalBytes };
-      }
-
-      function buildMatrix(text) {
-        const { size, align, finalBytes } = encodeDataBytes(text);
-        const matrix = Array.from({ length: size }, () => new Int8Array(size).fill(-1));
-        const reserved = Array.from({ length: size }, () => new Uint8Array(size));
-
-        const setFinder = (r, c) => {
-          for (let dr = -1; dr <= 7; dr++) {
-            for (let dc = -1; dc <= 7; dc++) {
-              const rr = r + dr, cc = c + dc;
-              if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
-              const inOuter = (dr >= 0 && dr <= 6 && (dc === 0 || dc === 6)) ||
-                              (dc >= 0 && dc <= 6 && (dr === 0 || dr === 6));
-              const inInner = (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4);
-              matrix[rr][cc] = (inOuter || inInner) ? 1 : 0;
-              reserved[rr][cc] = 1;
-            }
-          }
-        };
-
-        setFinder(0, 0);
-        setFinder(0, size - 7);
-        setFinder(size - 7, 0);
-
-        for (let i = 8; i < size - 8; i++) {
-          matrix[6][i] = (i % 2 === 0) ? 1 : 0;
-          reserved[6][i] = 1;
-          matrix[i][6] = (i % 2 === 0) ? 1 : 0;
-          reserved[i][6] = 1;
-        }
-
-        for (let r of align) {
-          for (let c of align) {
-            if (reserved[r][c]) continue;
-            for (let dr = -2; dr <= 2; dr++) {
-              for (let dc = -2; dc <= 2; dc++) {
-                const isDark = Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0);
-                matrix[r + dr][c + dc] = isDark ? 1 : 0;
-                reserved[r + dr][c + dc] = 1;
-              }
-            }
-          }
-        }
-
-        // Reserve format areas & dark module
-        for (let i = 0; i < 9; i++) {
-          if (i < size) {
-            reserved[8][i] = 1;
-            reserved[i][8] = 1;
-          }
-        }
-        for (let i = 0; i < 8; i++) {
-          reserved[8][size - 1 - i] = 1;
-          reserved[size - 1 - i][8] = 1;
-        }
-        matrix[size - 8][8] = 1;
-        reserved[size - 8][8] = 1;
-
-        const dataBits = [];
-        for (let b of finalBytes) {
-          for (let i = 7; i >= 0; i--) dataBits.push((b >>> i) & 1);
-        }
-
-        let bitIdx = 0;
-        let upward = true;
-        for (let col = size - 1; col > 0; col -= 2) {
-          if (col === 6) col--;
-          for (let step = 0; step < size; step++) {
-            const row = upward ? (size - 1 - step) : step;
-            for (let dc = 0; dc < 2; dc++) {
-              const c = col - dc;
-              if (!reserved[row][c]) {
-                let bit = bitIdx < dataBits.length ? dataBits[bitIdx++] : 0;
-                if ((row + c) % 2 === 0) bit ^= 1; // Mask 0
-                matrix[row][c] = bit;
-              }
-            }
-          }
-          upward = !upward;
-        }
-
-        // Format info bits for Level L (01), Mask 0 (000) -> 0x77c4
-        const formatInt = 0x77c4;
-        const fBits = [];
-        for (let i = 0; i < 15; i++) fBits.push((formatInt >>> i) & 1);
-
-        const fPos1 = [
-          [8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],
-          [7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8]
-        ];
-        for (let i = 0; i < 15; i++) {
-          const [r, c] = fPos1[i];
-          matrix[r][c] = fBits[14 - i];
-        }
-        for (let i = 0; i < 7; i++) {
-          matrix[size - 1 - i][8] = fBits[14 - i];
-        }
-        for (let i = 7; i < 15; i++) {
-          matrix[8][size - 15 + i] = fBits[14 - i];
-        }
-
-        return matrix;
-      }
-
-      function renderSVG(text, pixelSize = 240) {
-        const matrix = buildMatrix(text || "https://example.mil");
-        const n = matrix.length;
-        const quiet = 2;
-        const total = n + quiet * 2;
-        let paths = "";
-        for (let r = 0; r < n; r++) {
-          for (let c = 0; c < n; c++) {
-            if (matrix[r][c] === 1) {
-              paths += `M${c + quiet},${r + quiet}h1v1h-1z `;
-            }
-          }
-        }
-        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} ${total}" width="${pixelSize}" height="${pixelSize}" role="img" aria-label="QR Code for Customer Service"><rect width="100%" height="100%" fill="#ffffff"/><path d="${paths}" fill="#000000"/></svg>`;
-      }
-
-      return { renderSVG };
-    })();
-
-
     /*************************************************************************
      * 2. CENTRALIZED DATA STORE MODULE (dataStore.js architecture inline)
      * All state reads and writes pass through DataStore so the storage backend
@@ -1913,7 +1816,7 @@
      * 4. UI APPLICATION CONTROLLER & VIEWS
      *************************************************************************/
     const App = (() => {
-      let currentMode = "LIVE"; // CUSTOMER, STAFF, TV, PLACARD
+      let currentMode = "STAFF"; // STAFF, TV
       let customerFlow = {
         step: "HOME", // HOME, PICK_DEPT, PICK_SERVICE, SERVICE_DETAIL
         selectedDeptId: null,
@@ -1976,716 +1879,25 @@
         currentMode = newMode;
         document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
         const map = {
-          LIVE: "navLiveBtn",
-          CUSTOMER: "navCustomerBtn",
           STAFF: "navStaffBtn",
           TV: "navTvBtn",
-          PLACARD: "navPlacardBtn"
+          METRICS: "navMetricsBtn",
+          CONFIG: "navConfigBtn"
         };
         const btn = document.getElementById(map[newMode]);
         if (btn) btn.classList.add("active");
         render();
+        document.getElementById("tvView").dispatchEvent(new Event("tv-mode-change"));
       }
 
-      // Main render dispatcher
       function render() {
-        const live = currentMode === "LIVE";
+        const live = currentMode === "STAFF";
         document.getElementById("liveQueueView").hidden = !live;
-        document.getElementById("appViewport").hidden = live;
-        document.getElementById("demoNotice").hidden = live;
-        if (live) {
-          document.getElementById("headerNrcName").textContent = "NRC Houston Customer Service";
-          document.getElementById("liveAlertBanner").style.display = "none";
-          return;
-        }
-        const state = DataStore.readState();
-        document.getElementById("headerNrcName").textContent = state.settings.nrcName;
-        ClientSession.checkCustomerAlerts(state);
-
-        // Avoid clobbering active typing inside Admin or Staff forms unless necessary
-        const activeEl = document.activeElement;
-        if (activeEl && activeEl.dataset && activeEl.dataset.preserveFocus === "true") {
-          return;
-        }
-
-        const viewport = document.getElementById("appViewport");
-        if (currentMode === "CUSTOMER") {
-          renderCustomerPortal(viewport, state);
-        } else if (currentMode === "STAFF") {
-          renderStaffPortal(viewport, state);
-        } else if (currentMode === "TV") {
-          renderTvDisplay(viewport, state);
-        } else if (currentMode === "PLACARD") {
-          renderPlacardView(viewport, state);
-        }
+        document.getElementById("tvView").hidden = currentMode !== "TV";
+        document.getElementById("metricsView").hidden = currentMode !== "METRICS";
+        document.getElementById("configView").hidden = currentMode !== "CONFIG";
+        document.getElementById("liveAlertBanner").style.display = "none";
       }
-
-      /***********************************************************************
-       * CUSTOMER PORTAL VIEW (Mobile-First, Large Tap Targets)
-       ***********************************************************************/
-      function renderCustomerPortal(viewport, state) {
-        const profile = ClientSession.getCustomerProfile();
-        const activeTickets = state.tickets.filter(t =>
-          t.customerId === profile.customerId &&
-          ["WAITING", "CALLED", "SERVING", "CLOSED_OUT"].includes(t.status)
-        );
-
-        let html = `<div class="container-mobile">`;
-
-        // PII / Sensitive Data Notice (Always visible on customer screens)
-        html += `
-          <div class="pii-warning" role="note">
-            DO NOT ENTER SENSITIVE INFORMATION: Never enter your SSN, DoD ID, date of birth, or medical details into this system.
-          </div>
-        `;
-
-        // Active Tickets Section (Customer can hold 1 per department, across multiple departments)
-        if (activeTickets.length > 0 && customerFlow.step === "HOME") {
-          html += `
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; gap:0.5rem;">
-              <h2 style="margin:0; font-size:1.35rem;">Your Active Ticket${activeTickets.length > 1 ? "s" : ""}</h2>
-              <button type="button" class="btn btn-primary btn-sm" id="custBigRefreshBtn">↻ REFRESH STATUS</button>
-            </div>
-          `;
-
-          activeTickets.forEach(t => {
-            const dept = state.departments.find(d => d.id === t.deptId);
-            const svc = state.services.find(s => s.id === t.serviceId);
-            const posInfo = DataStore.getTicketPositionInfo(state, t.id);
-
-            let statusClass = "status-box";
-            let statusText = "";
-
-            if (t.status === "CALLED") {
-              statusClass += " called";
-              statusText = (state.settings.msgCalled || "It's your turn! {staff} is calling you: {msg}")
-                .replace("{staff}", t.calledByStaffName || "A staff member")
-                .replace("{msg}", t.callMessage || (dept ? `Report to ${dept.room}` : ""));
-            } else if (t.status === "SERVING") {
-              statusClass += " called";
-              statusText = `Currently being served by ${t.servedByStaffName || "Staff"} (${dept ? dept.room : ""}).`;
-            } else if (t.status === "CLOSED_OUT" || (dept && dept.status === "CLOSED")) {
-              statusClass += " closed";
-              statusText = "This line is closed for today.";
-            } else if (dept && dept.status === "PAUSED") {
-              statusClass += " paused";
-              statusText = `Paused — ${dept.pauseMessage || "Temporarily paused"}. You keep your #${posInfo.position} spot in line.`;
-            } else if (posInfo.position <= 2) {
-              statusClass += " almost";
-              statusText = `You are #${posInfo.position} in line. ${state.settings.msgAlmost || "You are almost up. Please be ready."}`;
-            } else {
-              statusText = (state.settings.msgWaiting || "You are #{pos} in line. Please remain in the waiting area.")
-                .replace("{pos}", posInfo.position);
-            }
-
-            html += `
-              <section class="ticket-card" aria-label="Ticket ${escapeHtml(t.displayId)}">
-                <div class="ticket-header">
-                  <div class="ticket-id-display">${escapeHtml(t.displayId)}</div>
-                  <div class="ticket-customer-name">${escapeHtml(t.customerName)}</div>
-                </div>
-                <div class="ticket-body">
-                  <div class="${statusClass}">${escapeHtml(statusText)}</div>
-                  <div class="ticket-meta-grid">
-                    <div>
-                      <div class="meta-label">Department</div>
-                      <div class="meta-val">${escapeHtml(dept ? `${dept.code} – ${dept.name}` : "Department")}</div>
-                    </div>
-                    <div>
-                      <div class="meta-label">Location</div>
-                      <div class="meta-val">${escapeHtml(dept ? dept.room : "—")}</div>
-                    </div>
-                    <div>
-                      <div class="meta-label">Service</div>
-                      <div class="meta-val">${escapeHtml(svc ? svc.name : "General Support")}</div>
-                    </div>
-                    <div>
-                      <div class="meta-label">Place in Line</div>
-                      <div class="meta-val">${t.status === "WAITING" ? `#${posInfo.position} (${posInfo.ahead} ahead)` : escapeHtml(t.status)}</div>
-                    </div>
-                  </div>
-                  <div style="text-align:center; margin-top:0.5rem;">
-                    <button type="button" class="subtle-leave-link" data-leave-ticket="${escapeHtml(t.id)}">Need to leave the line?</button>
-                  </div>
-                </div>
-              </section>
-            `;
-          });
-
-          html += `
-            <div class="card" style="text-align:center;">
-              <button type="button" class="btn btn-primary btn-block" id="custJoinAnotherDeptBtn" style="margin-bottom:0.75rem;">
-                + Get Help from Another Department
-              </button>
-              <button type="button" class="btn btn-secondary btn-block" id="custManualRefreshBtn">
-                ↻ Refresh Place in Line (Auto-updates every 30s)
-              </button>
-            </div>
-          `;
-        }
-
-        // STEP 1: Customer Sign-Up / Name Entry
-        if (customerFlow.step === "HOME" && activeTickets.length === 0) {
-          html += renderCustomerSignUpCard(profile);
-        } else if (customerFlow.step === "SIGNUP_EDIT") {
-          html += renderCustomerSignUpCard(profile);
-        } else if (customerFlow.step === "PICK_DEPT") {
-          html += renderPickDepartmentStep(state, profile, activeTickets);
-        } else if (customerFlow.step === "PICK_SERVICE") {
-          html += renderPickServiceStep(state);
-        } else if (customerFlow.step === "SERVICE_DETAIL") {
-          html += renderServiceDetailStep(state, profile);
-        }
-
-        html += `</div>`;
-        viewport.innerHTML = html;
-        bindCustomerEvents(viewport, state);
-      }
-
-      function renderCustomerSignUpCard(profile) {
-
-        return `
-
-          <div class="card">
-
-            <h1 style="margin-top:0; font-size:1.5rem; color:var(--navy-900);">Customer Sign-In</h1>
-
-            <p style="color:var(--text-muted); margin-top:0;">Enter your Rate/Rank and Name (Last, First) to get self-service forms or join a department line.</p>
-
-            <div class="form-group">
-
-              <label class="form-label" for="custRateRank">Rate / Rank (Required)</label>
-
-              <input type="text" id="custRateRank" class="form-input" data-preserve-focus="true" value="${escapeHtml(profile.rateRank || "")}" placeholder="e.g., YN2, LS1, LT">
-
-            </div>
-
-            <div class="form-group">
-
-              <label class="form-label" for="custFullName">Name — Last, First (Required)</label>
-
-              <input type="text" id="custFullName" class="form-input" data-preserve-focus="true" value="${escapeHtml(profile.fullName || "")}" placeholder="Last, First (e.g., Rivera, Alex)" autocomplete="name">
-
-            </div>
-
-            <div class="form-group">
-
-              <label class="form-label" for="custEmail">Email Address (Optional — to receive documents and alerts)</label>
-
-              <input type="email" id="custEmail" class="form-input" data-preserve-focus="true" value="${escapeHtml(profile.email)}" placeholder="name@us.navy.mil" autocomplete="email">
-
-            </div>
-
-            <div id="custSignUpError" style="color:var(--danger); font-weight:700; margin-bottom:0.75rem; display:none;"></div>
-
-            <button type="button" class="btn btn-primary btn-block" id="custContinueToDeptsBtn">Continue to Departments →</button>
-
-          </div>
-
-        `;
-
-      }
-
-      function renderPickDepartmentStep(state, profile, activeTickets) {
-
-        profile.firstName = profile.rateRank || "";
-
-        profile.lastName = profile.fullName || "";
-
-        const visibleDepts = state.departments
-
-          .filter(d => !d.hidden && d.code !== "FD")
-
-          .sort((a, b) => a.order - b.order);
-
-        const frontDeskDept = state.departments.find(d => d.code === "FD") || state.departments[state.departments.length - 1];
-
-        let html = `
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <div>
-                <div style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">SIGNED IN AS</div>
-                <div style="font-size:1.15rem; font-weight:800;">${escapeHtml(profile.firstName)} ${escapeHtml(profile.lastName)}</div>
-              </div>
-              <button type="button" class="btn btn-secondary btn-sm" id="custEditProfileBtn">Edit Name/Email</button>
-            </div>
-            ${activeTickets.length > 0 ? `<button type="button" class="btn btn-secondary btn-block btn-sm" id="custBackToTicketsBtn" style="margin-bottom:1rem;">← Back to My Active Tickets (${activeTickets.length})</button>` : ""}
-            <h2 style="margin-top:0; font-size:1.35rem;">1. Choose a Department</h2>
-        `;
-
-        // Prominent "I don't know which department" button routing to Front Desk queue
-        if (frontDeskDept) {
-          html += `
-            <button type="button" class="choice-btn" data-pick-dept="${escapeHtml(frontDeskDept.id)}" style="border-color:var(--gold-600); background-color:#fffbeb;">
-              <span class="choice-title">❓ I don't know which department</span>
-              <span class="choice-sub">Routes to Front Desk (${escapeHtml(frontDeskDept.room)}) for quick guidance</span>
-            </button>
-          `;
-        }
-
-        visibleDepts.forEach(d => {
-          const waitingCount = DataStore.getWaitingTicketsForDept(state, d.id).length;
-          const hasTicket = activeTickets.some(t => t.deptId === d.id);
-          let statusNote = `${d.room} • ${waitingCount} waiting`;
-          if (d.status === "PAUSED") statusNote = `PAUSED (${d.pauseMessage || "Temporarily paused"})`;
-          if (d.status === "CLOSED") statusNote = `CLOSED FOR TODAY`;
-          if (hasTicket) statusNote = `You already have an active ticket in ${d.code}`;
-
-          html += `
-            <button type="button" class="choice-btn" data-pick-dept="${escapeHtml(d.id)}">
-              <span class="choice-title">${escapeHtml(d.code)} – ${escapeHtml(d.name)}</span>
-              <span class="choice-sub">${escapeHtml(statusNote)}</span>
-            </button>
-          `;
-        });
-
-        html += `</div>`;
-        return html;
-      }
-
-      function renderPickServiceStep(state) {
-        const dept = state.departments.find(d => d.id === customerFlow.selectedDeptId);
-        if (!dept) {
-          customerFlow.step = "PICK_DEPT";
-          return "";
-        }
-        const svcs = state.services
-          .filter(s => s.deptId === dept.id && !s.hidden)
-          .sort((a, b) => (a.isOther === b.isOther ? a.order - b.order : a.isOther ? 1 : -1));
-
-        let statusNotice = "";
-        if (dept.status === "PAUSED") {
-          statusNotice = `<div class="status-box paused">Note: ${escapeHtml(dept.code)} queue is currently PAUSED (${escapeHtml(dept.pauseMessage || "back shortly")}). Self-service resources are still available.</div>`;
-        } else if (dept.status === "CLOSED") {
-          statusNotice = `<div class="status-box closed">Note: ${escapeHtml(dept.code)} queue is CLOSED for today. Self-service resources are still available.</div>`;
-        }
-
-        let html = `
-          <div class="card">
-            <button type="button" class="btn btn-secondary btn-sm" id="custBackToDeptsBtn" style="margin-bottom:0.85rem;">← Change Department</button>
-            <h2 style="margin-top:0; margin-bottom:0.25rem; font-size:1.35rem;">${escapeHtml(dept.code)} – ${escapeHtml(dept.name)}</h2>
-            <p style="margin-top:0; color:var(--text-muted);">2. Select the service you need:</p>
-            ${statusNotice}
-        `;
-
-        svcs.forEach(s => {
-          const badgeMap = {
-            EMAIL_DOCUMENT: "📧 Email Document",
-            FORM_INSTRUCTIONS: "📋 Form / Instructions",
-            SUBMIT_DOCUMENT: "📤 Document Turn-In",
-            JOIN_LINE: "👥 Join Line"
-          };
-          html += `
-            <button type="button" class="choice-btn" data-pick-service="${escapeHtml(s.id)}">
-              <span class="choice-title">${escapeHtml(s.name)}</span>
-              <span class="choice-sub">${escapeHtml(s.description || "")} • <strong>${badgeMap[s.type] || "Join Line"}</strong></span>
-            </button>
-          `;
-        });
-
-        html += `</div>`;
-        return html;
-      }
-
-      function renderServiceDetailStep(state, profile) {
-        const dept = state.departments.find(d => d.id === customerFlow.selectedDeptId);
-        const svc = state.services.find(s => s.id === customerFlow.selectedServiceId);
-        if (!dept || !svc) {
-          customerFlow.step = "PICK_DEPT";
-          return "";
-        }
-
-        const canJoinQueue = dept.status === "OPEN";
-        let queueDisabledBanner = "";
-        if (dept.status === "PAUSED") {
-          queueDisabledBanner = `<div class="status-box paused">Queue Paused — ${escapeHtml(dept.pauseMessage || "No new customers can join right now.")}</div>`;
-        } else if (dept.status === "CLOSED") {
-          queueDisabledBanner = `<div class="status-box closed">This line is closed for today.</div>`;
-        }
-
-        let selfServiceBlock = "";
-        if (svc.type === "EMAIL_DOCUMENT") {
-          selfServiceBlock = `
-            <div style="background:var(--info-bg); border:2px solid var(--info); border-radius:var(--radius); padding:1rem; margin-bottom:1.25rem;">
-              <h3 style="margin-top:0; color:var(--navy-900);">📧 Receive Document by Email</h3>
-              <p style="margin-bottom:0.75rem;">Document: <strong>${escapeHtml(svc.docName || svc.name)}</strong></p>
-              <div class="form-group">
-                <label class="form-label" for="custSelfEmailInput">Your Email Address (Required to send)</label>
-                <input type="email" id="custSelfEmailInput" class="form-input" data-preserve-focus="true" value="${escapeHtml(profile.email)}" placeholder="name@us.navy.mil">
-              </div>
-              <button type="button" class="btn btn-success btn-block" id="custSendEmailDocBtn">Send Document to My Email (Problem Solved)</button>
-            </div>
-          `;
-        } else if (svc.type === "FORM_INSTRUCTIONS") {
-          selfServiceBlock = `
-            <div style="background:var(--info-bg); border:2px solid var(--info); border-radius:var(--radius); padding:1rem; margin-bottom:1.25rem;">
-              <h3 style="margin-top:0; color:var(--navy-900);">📋 Instructions & Form Checklist</h3>
-              <div style="white-space:pre-wrap; background:#ffffff; padding:0.85rem; border-radius:6px; border:1px solid var(--border); margin-bottom:0.85rem;">${escapeHtml(svc.instructions || "Follow standard department procedures.")}</div>
-              ${svc.formLink ? `<p style="margin-bottom:0.85rem;"><a href="${escapeHtml(svc.formLink)}" target="_blank" rel="noopener" class="btn btn-secondary btn-block">🔗 Open Form / Reference Link</a></p>` : ""}
-              <button type="button" class="btn btn-success btn-block" id="custSelfResolvedFormBtn">✓ I Have What I Need (Done)</button>
-            </div>
-          `;
-        } else if (svc.type === "SUBMIT_DOCUMENT") {
-          selfServiceBlock = `
-            <div style="background:var(--info-bg); border:2px solid var(--info); border-radius:var(--radius); padding:1rem; margin-bottom:1.25rem;">
-              <h3 style="margin-top:0; color:var(--navy-900);">📤 Submit a Document Online</h3>
-              <div style="white-space:pre-wrap; background:#ffffff; padding:0.85rem; border-radius:6px; border:1px solid var(--border); margin-bottom:0.85rem;">${escapeHtml(svc.instructions || "Upload your signed package to the secure department drop-off link below.")}</div>
-              ${svc.submitLink ? `<p style="margin-bottom:0.85rem;"><a href="${escapeHtml(svc.submitLink)}" target="_blank" rel="noopener" class="btn btn-primary btn-block">📤 Open Secure Turn-In Link</a></p>` : ""}
-              <button type="button" class="btn btn-success btn-block" id="custSelfResolvedSubmitBtn">✓ I Turned In My Document (Done)</button>
-            </div>
-          `;
-        }
-
-        const joinHeading = svc.type === "JOIN_LINE"
-          ? "Join the Department Line"
-          : "Still need help? Join the line";
-
-        return `
-          <div class="card">
-            <button type="button" class="btn btn-secondary btn-sm" id="custBackToServicesBtn" style="margin-bottom:0.85rem;">← Back to ${escapeHtml(dept.code)} Services</button>
-            <h2 style="margin-top:0; margin-bottom:0.25rem;">${escapeHtml(svc.name)}</h2>
-            <p style="margin-top:0; color:var(--text-muted);">${escapeHtml(dept.code)} – ${escapeHtml(dept.name)} (${escapeHtml(dept.room)})</p>
-
-            ${selfServiceBlock}
-
-            <div style="border-top:2px solid var(--border); padding-top:1rem;">
-              <h3 style="margin-top:0;">${escapeHtml(joinHeading)}</h3>
-              ${queueDisabledBanner}
-              ${canJoinQueue ? `
-                <div class="form-group">
-                  <label class="form-label" for="custOptionalNote">Short Note for Staff (Optional — No SSN/DoD ID/Medical info)</label>
-                  <input type="text" id="custOptionalNote" class="form-input" data-preserve-focus="true" maxlength="120" value="${escapeHtml(customerFlow.otherNote)}" placeholder="e.g., Question on page 2 signature">
-                </div>
-                <button type="button" class="btn btn-primary btn-block" id="custConfirmJoinLineBtn">
-                  👥 Join ${escapeHtml(dept.code)} Line Now
-                </button>
-              ` : ""}
-            </div>
-          </div>
-        `;
-      }
-
-      function bindCustomerEvents(viewport, state) {
-        const profile = ClientSession.getCustomerProfile();
-
-        const continueBtn = viewport.querySelector("#custContinueToDeptsBtn");
-
-        if (continueBtn) {
-
-          continueBtn.addEventListener("click", () => {
-
-            const rr = viewport.querySelector("#custRateRank").value.trim().toUpperCase();
-
-            const full = viewport.querySelector("#custFullName").value.trim();
-
-            const em = viewport.querySelector("#custEmail").value.trim();
-
-            const errEl = viewport.querySelector("#custSignUpError");
-
-            if (!rr || !full) {
-
-              errEl.textContent = "Please enter your Rate/Rank and your Name (Last, First).";
-
-              errEl.style.display = "block";
-
-              return;
-
-            }
-
-            const parts = full.split(",");
-
-            profile.rateRank = rr;
-
-            profile.fullName = full;
-
-            profile.lastName = (parts[0] || "").trim();
-
-            profile.firstName = (parts.slice(1).join(" ") || "").trim();
-
-            profile.email = em;
-
-            ClientSession.saveCustomerProfile(profile);
-
-            customerFlow.step = "PICK_DEPT";
-
-            render();
-
-          });
-
-        }
-
-        const editProfileBtn = viewport.querySelector("#custEditProfileBtn");
-        if (editProfileBtn) {
-          editProfileBtn.addEventListener("click", () => {
-            customerFlow.step = "SIGNUP_EDIT";
-            render();
-          });
-        }
-
-        const joinAnotherBtn = viewport.querySelector("#custJoinAnotherDeptBtn");
-
-        if (joinAnotherBtn) {
-
-          joinAnotherBtn.addEventListener("click", () => {
-
-            if (!profile.rateRank || !profile.fullName) {
-
-              customerFlow.step = "SIGNUP_EDIT";
-
-            } else {
-
-              customerFlow.step = "PICK_DEPT";
-
-            }
-
-            render();
-
-          });
-
-        }
-
-        const backToTicketsBtn = viewport.querySelector("#custBackToTicketsBtn");
-        if (backToTicketsBtn) {
-          backToTicketsBtn.addEventListener("click", () => {
-            customerFlow.step = "HOME";
-            render();
-          });
-        }
-
-        const refreshBtns = viewport.querySelectorAll("#custBigRefreshBtn, #custManualRefreshBtn");
-        refreshBtns.forEach(btn => {
-          btn.addEventListener("click", () => render());
-        });
-
-        // Pick department buttons
-        viewport.querySelectorAll("[data-pick-dept]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const deptId = btn.getAttribute("data-pick-dept");
-            const dept = state.departments.find(d => d.id === deptId);
-            if (!dept) return;
-            customerFlow.selectedDeptId = deptId;
-
-            // If customer picked "I don't know which department" (Front Desk), take them directly to Front Desk service
-            if (dept.code === "FD") {
-              const fdSvc = state.services.find(s => s.deptId === dept.id && !s.hidden);
-              if (fdSvc) {
-                customerFlow.selectedServiceId = fdSvc.id;
-                customerFlow.step = "SERVICE_DETAIL";
-                render();
-                return;
-              }
-            }
-            customerFlow.step = "PICK_SERVICE";
-            render();
-          });
-        });
-
-        const backToDeptsBtn = viewport.querySelector("#custBackToDeptsBtn");
-        if (backToDeptsBtn) {
-          backToDeptsBtn.addEventListener("click", () => {
-            customerFlow.step = "PICK_DEPT";
-            render();
-          });
-        }
-
-        // Pick service buttons
-        viewport.querySelectorAll("[data-pick-service]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            customerFlow.selectedServiceId = btn.getAttribute("data-pick-service");
-            customerFlow.otherNote = "";
-            customerFlow.step = "SERVICE_DETAIL";
-            render();
-          });
-        });
-
-        const backToServicesBtn = viewport.querySelector("#custBackToServicesBtn");
-        if (backToServicesBtn) {
-          backToServicesBtn.addEventListener("click", () => {
-            customerFlow.step = "PICK_SERVICE";
-            render();
-          });
-        }
-
-        // Self-service resolution handlers
-        const sendEmailDocBtn = viewport.querySelector("#custSendEmailDocBtn");
-        if (sendEmailDocBtn) {
-          sendEmailDocBtn.addEventListener("click", () => {
-            const emailInput = viewport.querySelector("#custSelfEmailInput");
-            const em = emailInput ? emailInput.value.trim() : "";
-            if (!em || !em.includes("@")) {
-              alert("Please enter a valid email address so we can send your document.");
-              if (emailInput) emailInput.focus();
-              return;
-            }
-            profile.email = em;
-            ClientSession.saveCustomerProfile(profile);
-            DataStore.recordSelfService({
-
-              customerId: profile.customerId,
-
-              customerName: `${profile.rateRank || ""} ${profile.fullName || ""}`.trim(),
-
-              email: em,
-
-              deptId: customerFlow.selectedDeptId,
-
-              serviceId: customerFlow.selectedServiceId,
-
-              resolutionType: "EMAIL_DOCUMENT"
-
-            });
-            openModal(`
-              <h2 style="margin-top:0; color:var(--success);">✓ Document Sent to ${escapeHtml(em)}</h2>
-              <p>We have recorded your self-service request and queued the document/link to your email.</p>
-              <button type="button" class="btn btn-primary btn-block" id="modalDoneSelfBtn">Return to Home</button>
-            `, (m) => {
-              m.querySelector("#modalDoneSelfBtn").addEventListener("click", () => {
-                closeModal();
-                customerFlow.step = "HOME";
-                render();
-              });
-            });
-          });
-        }
-
-        const selfFormBtn = viewport.querySelector("#custSelfResolvedFormBtn");
-
-        if (selfFormBtn) {
-
-          selfFormBtn.addEventListener("click", () => {
-
-            DataStore.recordSelfService({
-
-              customerId: profile.customerId,
-
-              customerName: `${profile.rateRank || ""} ${profile.fullName || ""}`.trim(),
-
-              email: profile.email,
-
-              deptId: customerFlow.selectedDeptId,
-
-              serviceId: customerFlow.selectedServiceId,
-
-              resolutionType: "FORM_INSTRUCTIONS"
-
-            });
-
-            customerFlow.step = "HOME";
-
-            render();
-
-          });
-
-        }
-
-        const selfSubmitBtn = viewport.querySelector("#custSelfResolvedSubmitBtn");
-
-        if (selfSubmitBtn) {
-
-          selfSubmitBtn.addEventListener("click", () => {
-
-            DataStore.recordSelfService({
-
-              customerId: profile.customerId,
-
-              customerName: `${profile.rateRank || ""} ${profile.fullName || ""}`.trim(),
-
-              email: profile.email,
-
-              deptId: customerFlow.selectedDeptId,
-
-              serviceId: customerFlow.selectedServiceId,
-
-              resolutionType: "SUBMIT_DOCUMENT"
-
-            });
-
-            customerFlow.step = "HOME";
-
-            render();
-
-          });
-
-        }
-
-        // Join Line button
-
-        const joinLineBtn = viewport.querySelector("#custConfirmJoinLineBtn");
-
-        if (joinLineBtn) {
-
-          joinLineBtn.addEventListener("click", () => {
-
-            const noteEl = viewport.querySelector("#custOptionalNote");
-
-            const noteVal = noteEl ? noteEl.value.trim() : "";
-
-            try {
-
-              DataStore.createTicket({
-
-                customerId: profile.customerId,
-
-                rateRank: profile.rateRank,
-
-                fullName: profile.fullName,
-
-                firstName: profile.firstName,
-
-                lastName: profile.lastName,
-
-                email: profile.email,
-
-                deptId: customerFlow.selectedDeptId,
-
-                serviceId: customerFlow.selectedServiceId,
-
-                note: noteVal
-
-              });
-              // Request browser notification permission after joining
-              if ("Notification" in window && Notification.permission === "default") {
-                Notification.requestPermission().catch(() => {});
-              }
-              customerFlow.step = "HOME";
-              render();
-            } catch (err) {
-              alert(err.message);
-            }
-          });
-        }
-
-        // Leave queue confirmation modal (deliberately prominent "Stay in line" button)
-        viewport.querySelectorAll("[data-leave-ticket]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const tId = btn.getAttribute("data-leave-ticket");
-            const t = state.tickets.find(x => x.id === tId);
-            if (!t) return;
-            openModal(`
-              <h2 style="margin-top:0; color:var(--navy-900);">Are you sure? You will lose your place.</h2>
-              <p>If you leave the line for ticket <strong>${escapeHtml(t.displayId)}</strong>, your spot cannot be recovered.</p>
-              <button type="button" class="btn btn-primary btn-block" id="stayInLineDefaultBtn" style="margin-bottom:1rem; font-size:1.2rem; min-height:60px;">
-                ✓ Stay in Line (Keep My Spot)
-              </button>
-              <div style="text-align:center;">
-                <button type="button" class="btn btn-danger btn-sm" id="confirmLeaveLineBtn">
-                  Leave line and forfeit spot
-                </button>
-              </div>
-            `, (modal) => {
-              const stayBtn = modal.querySelector("#stayInLineDefaultBtn");
-              stayBtn.focus();
-              stayBtn.addEventListener("click", () => closeModal());
-              modal.querySelector("#confirmLeaveLineBtn").addEventListener("click", () => {
-                DataStore.updateTicketStatus({ ticketId: tId, newStatus: "LEFT" });
-                closeModal();
-                render();
-              });
-            });
-          });
-        });
-      }
-
 
       /***********************************************************************
        * STAFF PORTAL VIEW (Sign-In, Queue Management, Front Desk, Metrics, Admin)
@@ -4686,139 +3898,6 @@
       /***********************************************************************
        * WAITING-ROOM TV DISPLAY (Full-screen, Privacy-Preserving: NO Customer Names)
        ***********************************************************************/
-      function renderTvDisplay(viewport, state) {
-        const recentlyCalled = state.tickets
-          .filter(t => ["CALLED", "SERVING"].includes(t.status))
-          .sort((a, b) => (b.lastCalledTime || b.calledTime || 0) - (a.lastCalledTime || a.calledTime || 0))
-          .slice(0, 8);
-
-        const visibleDepts = state.departments.filter(d => !d.hidden).sort((a, b) => a.order - b.order);
-
-        const extractStaffFirstName = (fullName) => {
-          if (!fullName) return "Staff";
-          const parts = fullName.trim().split(/\s+/);
-          // E.g. "YN1 Alex Rivera" -> "YN1 Alex" or first name
-          return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : parts[0];
-        };
-
-        viewport.innerHTML = `
-          <div class="tv-screen" aria-label="Waiting Room TV Display">
-            <div class="tv-panel">
-              <h1 class="tv-heading">📢 Now Calling — Please Report</h1>
-              ${recentlyCalled.length === 0 ? `
-                <div style="font-size:1.5rem; color:#94a3b8; padding:2rem 0;">
-                  Please watch this screen. Your ticket number will appear here when called.
-                </div>
-              ` : recentlyCalled.map(t => {
-                const dept = state.departments.find(d => d.id === t.deptId);
-                const staffFirst = extractStaffFirstName(t.calledByStaffName || t.servedByStaffName);
-                return `
-                  <div class="tv-call-card">
-                    <div>
-                      <div class="tv-ticket-num">${escapeHtml(t.displayId)}</div>
-                      <div style="color:#86efac; font-weight:700; font-size:1.05rem;">${escapeHtml(dept ? dept.name : "")}</div>
-                    </div>
-                    <div class="tv-call-details">
-                      <div style="color:#fbbf24; font-size:1.4rem; font-weight:800;">${escapeHtml(dept ? dept.room : "Front Counter")}</div>
-                      <div>Staff: ${escapeHtml(staffFirst)}</div>
-                      <div style="font-size:1rem; color:#cbd5e1;">${escapeHtml(t.callMessage || "")}</div>
-                    </div>
-                  </div>
-                `;
-              }).join("")}
-            </div>
-
-            <div class="tv-panel">
-              <h2 class="tv-heading">👥 Waiting by Department</h2>
-              ${visibleDepts.map(d => {
-                const wCount = DataStore.getWaitingTicketsForDept(state, d.id).length;
-                let statusInfo = `<span class="tv-wait-pill">${wCount} Waiting</span>`;
-                if (d.status === "PAUSED") statusInfo = `<span class="badge badge-paused" style="font-size:1rem;">PAUSED (${wCount} in line)</span>`;
-                if (d.status === "CLOSED") statusInfo = `<span class="badge badge-closed" style="font-size:1rem;">CLOSED</span>`;
-                return `
-                  <div class="tv-dept-row">
-                    <div>
-                      <strong style="color:#ffffff; font-size:1.35rem;">${escapeHtml(d.code)}</strong>
-                      <span style="color:#cbd5e1; margin-left:0.5rem;">${escapeHtml(d.name)}</span>
-                      <div style="font-size:0.9rem; color:#94a3b8;">${escapeHtml(d.room)}</div>
-                    </div>
-                    <div>${statusInfo}</div>
-                  </div>
-                `;
-              }).join("")}
-            </div>
-          </div>
-        `;
-      }
-
-
-      /***********************************************************************
-       * PRINT QR PLACARD VIEW
-       ***********************************************************************/
-      function renderPlacardView(viewport, state) {
-
-        const baseUrl = (state.settings.qrTargetUrl || window.location.href).split("#")[0];
-
-        const targetUrl = baseUrl.includes("?") ? baseUrl : `${baseUrl}#customer`;
-
-        const svgMarkup = QRGenerator.renderSVG(targetUrl, 300);
-
-        viewport.innerHTML = `
-          <div class="container-mobile">
-            <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-              <button type="button" class="btn btn-primary" id="printPlacardNowBtn">🖨️ Print QR Placard</button>
-              <span style="font-size:0.9rem; color:var(--text-muted);">Target URL editable in Staff Admin → Settings</span>
-            </div>
-
-            <div class="placard-box">
-              <div style="font-size:1.2rem; font-weight:800; color:var(--navy-700); letter-spacing:0.06em; text-transform:uppercase;">
-                ${escapeHtml(state.settings.nrcName)}
-              </div>
-              <h1 style="font-size:2.4rem; font-weight:900; color:var(--navy-900); margin:0.6rem 0;">
-                Scan for Customer Service
-              </h1>
-              <p style="font-size:1.15rem; color:var(--text-muted); margin-bottom:1.5rem;">
-                One QR Code for All Departments • Self-Service Forms & Live Queue
-              </p>
-              <div style="display:inline-block; padding:1rem; border:3px solid var(--navy-900); border-radius:12px; background:#ffffff;">
-                ${svgMarkup}
-              </div>
-              <p style="margin-top:1.25rem; font-weight:700; font-size:1.05rem; color:var(--navy-900); word-break:break-all;">
-                ${escapeHtml(targetUrl)}
-              </p>
-              <div style="margin-top:1.25rem; font-size:0.95rem; color:var(--text-muted); border-top:2px solid var(--border); padding-top:1rem;">
-                Check your place in line from your phone and get notified when you are 2 spots away!
-              </div>
-            </div>
-          </div>
-        `;
-
-        const printBtn = viewport.querySelector("#printPlacardNowBtn");
-
-        if (printBtn) {
-
-          printBtn.addEventListener("click", () => window.print());
-
-        }
-
-        const openCustBtn = viewport.querySelector("#placardOpenCustomerBtn");
-
-        if (openCustBtn) {
-
-          openCustBtn.addEventListener("click", () => setMode("CUSTOMER"));
-
-        }
-
-        const openStaffBtn = viewport.querySelector("#placardOpenStaffBtn");
-
-        if (openStaffBtn) {
-
-          openStaffBtn.addEventListener("click", () => setMode("STAFF"));
-
-        }
-
-      }
-
       // Initialize Top Bar & Auto-Refresh Timers
 
       function init() {
@@ -4831,21 +3910,12 @@
 
           currentMode = "TV";
 
-        } else if (window.location.hash === "#placard") {
-
-          currentMode = "PLACARD";
-
-        } else if (window.location.hash === "#customer") {
-
-          currentMode = "CUSTOMER";
-
         }
 
-        document.getElementById("navLiveBtn").addEventListener("click", () => setMode("LIVE"));
-        document.getElementById("navCustomerBtn").addEventListener("click", () => setMode("CUSTOMER"));
         document.getElementById("navStaffBtn").addEventListener("click", () => setMode("STAFF"));
+        document.getElementById("navConfigBtn").addEventListener("click", () => setMode("CONFIG"));
+        document.getElementById("navMetricsBtn").addEventListener("click", () => setMode("METRICS"));
         document.getElementById("navTvBtn").addEventListener("click", () => setMode("TV"));
-        document.getElementById("navPlacardBtn").addEventListener("click", () => setMode("PLACARD"));
 
         document.getElementById("dismissAlertBtn").addEventListener("click", () => {
           document.getElementById("liveAlertBanner").style.display = "none";
@@ -4856,11 +3926,6 @@
         });
 
         DataStore.subscribe(() => render());
-
-        // Auto-refresh every 30 seconds for customer & staff screens, and every 10s for TV wait times
-        setInterval(() => {
-          render();
-        }, 15000);
 
         setMode(currentMode);
       }
@@ -4883,15 +3948,143 @@
   const identity = document.getElementById("identity");
   const tbody = document.getElementById("tickets");
   const callNext = document.getElementById("callNext");
+  const clearQueue = document.getElementById("clearQueue");
+  const clearPrompt = document.getElementById("clearQueuePrompt");
+  const confirmClear = document.getElementById("confirmClearQueue");
+  let clearSnapshot = [];
   const callLocation = document.getElementById("callLocation");
+  // Match department option values to the codes stored in the Tickets list.
+  const reportingRooms = { defaultRoom: "2400" };
+  const configItemsUrl = new URL(site + "/_api/web/lists/getbytitle('QueueConfiguration')/items");
+  const configStatus = document.getElementById("configStatus");
+  let roomConfig = new Map();
+  let configBusy = false;
+  const configuredRooms = document.getElementById("configuredRooms");
+  document.getElementById("configTicketsLink").href = site;
+  function renderReportingRooms() {
+    const previous = callLocation.value;
+    callLocation.options.length = 1;
+    configuredRooms.replaceChildren();
+    for (const choice of department.options) {
+      if (!choice.value) continue;
+      const configured = roomConfig.get(choice.value);
+      const room = configured?.ReportingRoom || reportingRooms.defaultRoom;
+      const destination = choice.value + " in room " + room;
+      callLocation.add(new Option("Report to " + destination, destination));
+      const entry = document.createElement("li");
+      const label = document.createElement("label");
+      label.textContent = choice.text + " ";
+      const input = document.createElement("input");
+      input.type = "text";
+      input.maxLength = 60;
+      input.value = room;
+      input.disabled = !configured;
+      label.appendChild(input);
+      const save = document.createElement("button");
+      save.type = "button";
+      save.className = "btn btn-secondary btn-sm";
+      save.textContent = "Save room";
+      save.disabled = !configured;
+      save.addEventListener("click", () => saveReportingRoom(configured, input.value.trim()));
+      entry.append(label, save);
+      if (!configured) {
+        const hint = document.createElement("p");
+        hint.className = "muted";
+        hint.textContent = "Using the default room. Add a QueueConfiguration item with Title " +
+          choice.value + " and a ReportingRoom value, then reopen Configuration.";
+        entry.appendChild(hint);
+      }
+      configuredRooms.appendChild(entry);
+    }
+    if (Array.from(callLocation.options).some(option => option.value === previous)) callLocation.value = previous;
+    updateControls();
+  }
+
+  async function readReportingRooms(signal) {
+    const url = new URL(configItemsUrl);
+    url.searchParams.set("$select", "Id,Title,ReportingRoom");
+    url.searchParams.set("$top", "100");
+    const rows = await readTicketPages(url, signal, configItemsUrl);
+    const rooms = new Map();
+    for (const row of rows) {
+      if (!row.Title || !row.ReportingRoom?.trim() || rooms.has(row.Title)) {
+        throw new Error("Each configuration row needs a unique department code and a reporting room.");
+      }
+      rooms.set(row.Title, row);
+    }
+    roomConfig = rooms;
+    renderReportingRooms();
+  }
+
+  async function loadReportingRooms() {
+    if (configBusy) return;
+    configBusy = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      await readReportingRooms(controller.signal);
+      configStatus.textContent = "Rooms loaded. You can save existing rows if you have edit access to QueueConfiguration.";
+    } catch (error) {
+      configStatus.textContent = "Could not load QueueConfiguration. Verify list setup and access. " + error.message;
+    } finally {
+      clearTimeout(timeout);
+      configBusy = false;
+    }
+  }
+
+  async function saveReportingRoom(row, room) {
+    if (configBusy || !row) return;
+    const id = Number(row.Id);
+    const etag = row.__metadata?.etag;
+    if (!room || !Number.isSafeInteger(id) || id < 1 || !etag || etag === "*") {
+      configStatus.textContent = "Enter a room and reload Configuration if the row cannot be verified.";
+      return;
+    }
+    configBusy = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const context = await readJson(site + "/_api/contextinfo", controller.signal, "POST");
+      const digest = context.GetContextWebInformation?.FormDigestValue;
+      if (!digest) throw new Error("SharePoint did not provide a request digest.");
+      const response = await mergeTicket(configItemsUrl.href + "(" + id + ")", digest, etag,
+        { ReportingRoom: room }, controller.signal);
+      if (response.status === 412) {
+        await readReportingRooms(controller.signal);
+        configStatus.textContent = "Someone changed this room. Review the latest value before saving again.";
+      } else if (response.status === 204) {
+        await readReportingRooms(controller.signal);
+        configStatus.textContent = "Saved reporting room for " + row.Title + ".";
+      } else {
+        throw new Error("SharePoint returned HTTP " + response.status + ". Verify edit access.");
+      }
+    } catch (error) {
+      configStatus.textContent = "Could not confirm the room update. Reopen Configuration to check the saved value. " + error.message;
+    } finally {
+      clearTimeout(timeout);
+      configBusy = false;
+    }
+  }
+
   const callResult = document.getElementById("callResult");
+  const transitions = {
+    Waiting: { status: "Called", label: "Call ticket" },
+    Called: { status: "Serving", label: "Start service", timestamp: "ServingAt" },
+    Serving: { status: "Done", label: "Complete ticket", timestamp: "DoneAt" }
+  };
+  let staffEmail = "";
   let busy = false;
 
   function updateControls() {
     refresh.disabled = busy;
+    clearQueue.disabled = busy || !staffEmail || !department.value || !tickets.some(row => row.Department === department.value);
+    confirmClear.disabled = clearQueue.disabled;
     department.disabled = busy;
     callLocation.disabled = busy;
-    callNext.disabled = busy || !refreshedAt || !department.value || !callLocation.value.trim();
+    callNext.disabled = busy || !staffEmail || !refreshedAt || !department.value || !callLocation.value.trim();
+    for (const button of tbody.querySelectorAll("button")) {
+      button.disabled = busy || !staffEmail;
+    }
   }
   let tickets = [];
   let refreshedAt = null;
@@ -4917,16 +4110,20 @@
 
   async function readTickets(signal) {
     const url = new URL(itemsUrl);
-    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,JoinedAt");
-    url.searchParams.set("$filter", "Status eq 'Waiting'");
+    url.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,Service,JoinedAt,Status");
+    url.searchParams.set("$filter", "Status eq 'Waiting' or Status eq 'Called' or Status eq 'Serving'");
     url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
     url.searchParams.set("$top", "100");
+    return readTicketPages(url, signal);
+  }
+
+  async function readTicketPages(url, signal, listUrl = itemsUrl) {
     const rows = [];
     const seenPages = new Set();
     let next = url;
 
     while (next) {
-      if (next.origin !== itemsUrl.origin || next.pathname !== itemsUrl.pathname || seenPages.has(next.href)) {
+      if (next.origin !== listUrl.origin || next.pathname !== listUrl.pathname || seenPages.has(next.href)) {
         throw new Error("SharePoint returned an unexpected paging link.");
       }
       seenPages.add(next.href);
@@ -4938,6 +4135,267 @@
     return rows;
   }
 
+  const tvView = document.getElementById("tvView");
+  const tvStatus = document.getElementById("tvStatus");
+  const tvCalls = document.getElementById("tvCalls");
+  const tvCounts = document.getElementById("tvCounts");
+  let tvRefresh;
+  let tvRequest;
+
+  function tvElement(tag, className, content) {
+    const element = document.createElement(tag);
+    element.className = className;
+    if (content !== undefined) element.textContent = content;
+    return element;
+  }
+
+  async function loadTv() {
+    const controller = new AbortController();
+    tvRequest = controller;
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    const calledUrl = new URL(itemsUrl);
+    calledUrl.searchParams.set("$select", "Id,Title,RankRate,SailorName,Department,CalledLocation");
+    calledUrl.searchParams.set("$filter", "Status eq 'Called'");
+    calledUrl.searchParams.set("$orderby", "LastCalledAt desc,Id desc");
+    calledUrl.searchParams.set("$top", "8");
+    const waitingUrl = new URL(itemsUrl);
+    waitingUrl.searchParams.set("$select", "Id,Department");
+    waitingUrl.searchParams.set("$filter", "Status eq 'Waiting'");
+    waitingUrl.searchParams.set("$orderby", "Id asc");
+    waitingUrl.searchParams.set("$top", "100");
+
+    try {
+      const [called, waiting] = await Promise.all([
+        readJson(calledUrl.href, controller.signal),
+        readTicketPages(waitingUrl, controller.signal)
+      ]);
+      if (tvRequest !== controller) return;
+      if (!Array.isArray(called.results)) throw new Error("Unexpected Tickets response.");
+      tvCalls.replaceChildren(...called.results.map(ticket => {
+        const card = tvElement("div", "tv-call-card");
+        const sailor = [ticket.RankRate, ticket.SailorName]
+          .map(value => (value || "").trim())
+          .filter(Boolean)
+          .join(" ");
+        const ticketNumber = ticket.Title || "#" + ticket.Id;
+        const reference = tvElement("div", "tv-ticket-num", [ticketNumber, sailor].filter(Boolean).join(" · "));
+        reference.title = reference.textContent;
+        const details = tvElement("div", "tv-call-details");
+        details.append(
+          tvElement("strong", "", ticket.CalledLocation ? "Report to " + ticket.CalledLocation : "Ask the front desk"),
+          tvElement("div", "", ticket.Department || "")
+        );
+        card.append(reference, details);
+        return card;
+      }));
+
+      const counts = new Map();
+      for (const ticket of waiting) {
+        const name = ticket.Department || "Unassigned";
+        counts.set(name, (counts.get(name) || 0) + 1);
+      }
+      tvCounts.replaceChildren(...Array.from(counts.keys()).sort().map(name => {
+        const row = tvElement("div", "tv-dept-row");
+        row.append(tvElement("strong", "", name), tvElement("span", "tv-wait-pill", counts.get(name) + " Waiting"));
+        return row;
+      }));
+      if (!counts.size) tvCounts.textContent = "No tickets are waiting.";
+      tvStatus.textContent = called.results.length ? "" : "Please watch this screen. Your name will appear here when called.";
+    } catch {
+      if (tvRequest !== controller) return;
+      tvCalls.replaceChildren();
+      tvCounts.replaceChildren();
+      tvStatus.textContent = "Queue unavailable. Check the Firepit session and Tickets list access. Retrying automatically.";
+    } finally {
+      clearTimeout(timeout);
+      controller.abort();
+      if (tvRequest === controller) tvRefresh = setTimeout(loadTv, 15000);
+    }
+  }
+
+  tvView.addEventListener("tv-mode-change", () => {
+    clearTimeout(tvRefresh);
+    tvRequest?.abort();
+    tvRequest = null;
+    tvCalls.replaceChildren();
+    tvCounts.replaceChildren();
+    if (!tvView.hidden) {
+      tvStatus.textContent = "Loading the live queue…";
+      loadTv();
+    }
+  });
+
+  const metricsStart = document.getElementById("metricsStart");
+  const metricsEnd = document.getElementById("metricsEnd");
+  const metricsRefresh = document.getElementById("metricsRefresh");
+  const metricsStatus = document.getElementById("metricsStatus");
+  const metricsRows = document.getElementById("metricsRows");
+
+  const metricsStatusChart = document.getElementById("metricsStatusChart");
+  const metricsStaffChart = document.getElementById("metricsStaffChart");
+  const metricsWaitChart = document.getElementById("metricsWaitChart");
+
+  function formatStaffName(title) {
+    const name = (title || "").trim();
+    if (!name || name.includes("@")) return "";
+    if (name.includes(",")) {
+      const [last, given] = name.split(",");
+      return [last.trim(), given.trim().split(/\s+/)[0]].filter(Boolean).join(", ");
+    }
+    const parts = name.split(/\s+/);
+    return parts.length > 1 ? parts[parts.length - 1] + ", " + parts[0] : name;
+  }
+
+  async function staffMetricLabels(totals, signal) {
+    const labels = [];
+    for (const [email, total] of totals) {
+      let label = "Unattributed";
+      if (email !== "Unattributed") {
+        const url = new URL(site + "/_api/web/siteusers");
+        url.searchParams.set("$select", "Title");
+        url.searchParams.set("$filter", "Email eq '" + email.replace(/'/g, "''") + "'");
+        try {
+          const users = await readJson(url.href, signal);
+          label = formatStaffName(users.results?.[0]?.Title) || "Name unavailable";
+        } catch {
+          label = "Name unavailable";
+        }
+      }
+      labels.push([label, total]);
+    }
+    return labels;
+  }
+
+  function renderMetricsChart(container, values, suffix, digits) {
+    const entries = Array.from(values).sort((a, b) => b[1] - a[1]);
+    if (!entries.length) {
+      container.textContent = "No data for this period.";
+      return;
+    }
+    const max = Math.max(1, entries[0][1]);
+    entries.forEach(([name, value], index) => {
+      const row = document.createElement("div");
+      row.className = "metrics-bar";
+      const label = document.createElement("label");
+      const bar = document.createElement("progress");
+      bar.id = container.id + "-" + index;
+      label.htmlFor = bar.id;
+      label.textContent = name + " · " + value.toFixed(digits) + suffix;
+      bar.max = max;
+      bar.value = value;
+      row.append(label, bar);
+      container.appendChild(row);
+    });
+  }
+
+  function localDateInput(date) {
+    const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+  }
+
+  const today = new Date();
+  metricsStart.value = localDateInput(new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6));
+  metricsEnd.value = localDateInput(today);
+
+  async function loadMetrics() {
+    if (metricsRefresh.disabled) return;
+    metricsStatus.dataset.error = "false";
+    metricsRows.replaceChildren();
+    metricsStatusChart.replaceChildren();
+    metricsWaitChart.replaceChildren();
+    metricsStaffChart.replaceChildren();
+    const staffTable = document.getElementById("metricsStaffTable");
+    const staffRows = document.getElementById("metricsStaffRows");
+    staffTable.hidden = true;
+    staffRows.replaceChildren();
+    if (!metricsStart.value || !metricsEnd.value || metricsStart.value > metricsEnd.value) {
+      metricsStatus.dataset.error = "true";
+      metricsStatus.textContent = "Select a valid start and end date.";
+      return;
+    }
+    const start = new Date(metricsStart.value + "T00:00:00");
+    const end = new Date(metricsEnd.value + "T00:00:00");
+    end.setDate(end.getDate() + 1);
+    const url = new URL(itemsUrl);
+    url.searchParams.set("$select", "Id,Department,Service,Status,JoinedAt,FirstCalledAt,ServiceProvidedBy");
+    url.searchParams.set("$filter", "JoinedAt ge datetime'" + start.toISOString() +
+      "' and JoinedAt lt datetime'" + end.toISOString() + "'");
+    url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
+    url.searchParams.set("$top", "100");
+
+    metricsRefresh.disabled = metricsStart.disabled = metricsEnd.disabled = true;
+    metricsStatus.textContent = "Reading SharePoint Tickets…";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const rows = await readTicketPages(url, controller.signal);
+      const groups = new Map();
+      const statusTotals = new Map();
+      const departmentWaits = new Map();
+      const staffTotals = new Map();
+      for (const ticket of rows) {
+        const labels = [ticket.Department || "Unassigned", ticket.Service || "Unspecified", ticket.Status || "Unknown"];
+        statusTotals.set(labels[2], (statusTotals.get(labels[2]) || 0) + 1);
+        if (ticket.Status === "Done") {
+          const staff = (ticket.ServiceProvidedBy || "").trim().toLowerCase() || "Unattributed";
+          staffTotals.set(staff, (staffTotals.get(staff) || 0) + 1);
+        }
+        const key = JSON.stringify(labels);
+        if (!groups.has(key)) groups.set(key, { labels, count: 0, waitMs: 0, timed: 0 });
+        const group = groups.get(key);
+        group.count++;
+        const wait = Date.parse(ticket.FirstCalledAt) - Date.parse(ticket.JoinedAt);
+        if (Number.isFinite(wait) && wait >= 0) {
+          group.waitMs += wait;
+          group.timed++;
+          const department = departmentWaits.get(labels[0]) || { total: 0, count: 0 };
+          department.total += wait;
+          department.count++;
+          departmentWaits.set(labels[0], department);
+        }
+      }
+      for (const key of Array.from(groups.keys()).sort()) {
+        const group = groups.get(key);
+        const row = document.createElement("tr");
+        const average = group.timed ? (group.waitMs / group.timed / 60000).toFixed(1) + " min" : "—";
+        for (const value of [...group.labels, group.count, average]) {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        }
+        metricsRows.appendChild(row);
+      }
+      const staffLabels = await staffMetricLabels(staffTotals, controller.signal);
+      renderMetricsChart(metricsStaffChart, staffLabels, "", 0);
+      for (const [name, total] of staffLabels.sort((a, b) => b[1] - a[1])) {
+        const row = staffRows.insertRow();
+        row.insertCell().textContent = name;
+        row.insertCell().textContent = total;
+      }
+      staffTable.hidden = !staffLabels.length;
+      renderMetricsChart(metricsStatusChart, statusTotals, "", 0);
+      renderMetricsChart(metricsWaitChart, Array.from(departmentWaits, ([name, wait]) =>
+        [name, wait.total / wait.count / 60000]), " min", 1);
+      metricsStatus.textContent = rows.length ? rows.length + " tickets in the selected period." : "No tickets in the selected period.";
+    } catch (error) {
+      metricsStatus.dataset.error = "true";
+      metricsStatus.textContent = error.name === "AbortError"
+        ? "Metrics timed out. Try a shorter date range."
+        : error instanceof TypeError
+          ? "Could not reach SharePoint. Open Metrics from the published Firepit page and try again."
+          : error.message;
+      metricsStatusChart.textContent = "Ticket counts unavailable.";
+      metricsWaitChart.textContent = "Wait times unavailable.";
+      metricsStaffChart.textContent = "Staff totals unavailable.";
+    } finally {
+      clearTimeout(timeout);
+      metricsRefresh.disabled = metricsStart.disabled = metricsEnd.disabled = false;
+    }
+  }
+
+  metricsRefresh.addEventListener("click", loadMetrics);
+  document.getElementById("navMetricsBtn").addEventListener("click", loadMetrics);
+
   async function inspectEmptyQueue(signal) {
     const url = new URL(itemsUrl);
     url.searchParams.set("$select", "Id,Status");
@@ -4947,7 +4405,7 @@
     if (!Array.isArray(page.results)) throw new Error("SharePoint returned an unexpected status response.");
     if (!page.results.length) return "SharePoint returned no Tickets rows for this account. Check the list and account permissions.";
     const statuses = [...new Set(page.results.map(row => row.Status || "(blank)"))];
-    return "No Waiting tickets. Status values in the latest " + page.results.length + " visible rows: " + statuses.join(", ") + ".";
+    return "No active tickets. Status values in the latest " + page.results.length + " visible rows: " + statuses.join(", ") + ".";
   }
 
   function render() {
@@ -4962,19 +4420,32 @@
         row.Department,
         [row.RankRate, row.SailorName].filter(Boolean).join(" "),
         row.Service,
-        joined && Number.isFinite(joined.getTime()) ? joined.toLocaleString() : "—"
+        joined && Number.isFinite(joined.getTime()) ? joined.toLocaleString() : "—",
+        row.Status
       ];
       for (const value of values) {
         const td = document.createElement("td");
         td.textContent = value || "—";
         tr.appendChild(td);
       }
+      const action = document.createElement("td");
+      const transition = transitions[row.Status];
+      if (transition) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-secondary";
+        button.textContent = transition.label;
+        button.setAttribute("aria-label", transition.label + " " + values[0]);
+        button.addEventListener("click", () => advanceTicket(row));
+        action.appendChild(button);
+      }
+      tr.appendChild(action);
       tbody.appendChild(tr);
     }
     status.dataset.error = "false";
     const summary = !tickets.length
       ? emptyQueueDetail
-      : visible.length + " waiting" + (visible.length ? "" : " in this department. Try All departments.");
+      : visible.length + " active · " + visible.filter(row => row.Status === "Waiting").length + " waiting";
     status.textContent = summary + " · Last refreshed " + refreshedAt.toLocaleTimeString();
   }
 
@@ -4982,9 +4453,11 @@
     if (busy) return;
     busy = true;
     updateControls();
+    dismissClearQueue();
     tickets = [];
     refreshedAt = null;
     emptyQueueDetail = "";
+    staffEmail = "";
     identity.textContent = "";
     render();
     status.dataset.error = "false";
@@ -4993,10 +4466,12 @@
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      const user = await readJson(site + "/_api/web/currentuser?$select=Title", controller.signal);
+      const user = await readJson(site + "/_api/web/currentuser?$select=Title,Email", controller.signal);
       tickets = await readTickets(controller.signal);
       if (!tickets.length) emptyQueueDetail = await inspectEmptyQueue(controller.signal);
-      identity.textContent = user.Title ? "Signed in as " + user.Title : "";
+      staffEmail = (user.Email || "").trim();
+      identity.textContent = formatStaffName(user.Title);
+      if (!staffEmail) showQueueAlert("SharePoint did not return an email for this account. Ticket actions are unavailable.");
       refreshedAt = new Date();
       render();
     } catch (error) {
@@ -5013,35 +4488,138 @@
     }
   }
 
-  async function claimNextTicket() {
-    if (callNext.disabled) return;
-    const selectedDepartment = department.value;
-    const location = callLocation.value.trim();
+  function showQueueAlert(message = "") {
+    const alert = document.getElementById("queueAlert");
+    alert.hidden = !message;
+    alert.textContent = message;
+  }
+
+  function mergeTicket(url, digest, etag, fields, signal) {
+    return fetch(url, {
+      method: "POST",
+      credentials: "include",
+      signal,
+      headers: {
+        Accept: "application/json;odata=verbose",
+        "Content-Type": "application/json;odata=nometadata",
+        "X-RequestDigest": digest,
+        "X-HTTP-Method": "MERGE",
+        "IF-MATCH": etag
+      },
+      body: JSON.stringify(fields)
+    });
+  }
+
+  function dismissClearQueue() {
+    clearSnapshot = [];
+    clearPrompt.hidden = true;
+  }
+
+  clearQueue.addEventListener("click", () => {
+    if (clearQueue.disabled) return;
+    clearSnapshot = tickets.filter(row => row.Department === department.value);
+    document.getElementById("clearQueueMessage").textContent =
+      "Cancel " + clearSnapshot.length + " active tickets in " + department.value +
+      "? This includes waiting, called, and serving tickets. Their records will remain in SharePoint.";
+    clearPrompt.hidden = false;
+    confirmClear.focus();
+  });
+
+  document.getElementById("keepQueue").addEventListener("click", () => {
+    dismissClearQueue();
+    clearQueue.focus();
+  });
+
+  confirmClear.addEventListener("click", async () => {
+    if (confirmClear.disabled || !clearSnapshot.length) return;
+    const snapshot = clearSnapshot;
+    dismissClearQueue();
+    showQueueAlert();
     busy = true;
     updateControls();
-    callResult.textContent = "Checking the oldest Waiting ticket…";
+    callResult.textContent = "Clearing the selected department queue…";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    let cleared = 0;
+    let skipped = 0;
+    try {
+      const context = await readJson(site + "/_api/contextinfo", controller.signal, "POST");
+      const digest = context.GetContextWebInformation?.FormDigestValue;
+      if (!digest) throw new Error("SharePoint did not provide a request digest.");
+      for (const row of snapshot) {
+        const id = Number(row.Id);
+        const etag = row.__metadata?.etag;
+        if (!Number.isSafeInteger(id) || id < 1 || !etag || etag === "*") {
+          skipped++;
+          continue;
+        }
+        const response = await mergeTicket(itemsUrl.href + "(" + id + ")", digest, etag,
+          { Status: "Cancelled" }, controller.signal);
+        if (response.status === 204) cleared++;
+        else if (response.status === 404 || response.status === 412) skipped++;
+        else throw new Error("SharePoint returned HTTP " + response.status + ".");
+      }
+      callResult.textContent = cleared + " tickets cancelled. " + skipped + " skipped.";
+    } catch (error) {
+      callResult.textContent = "";
+      showQueueAlert(cleared + " cancellations confirmed before the clear stopped. Check the refreshed queue before retrying. " + error.message);
+    } finally {
+      clearTimeout(timeout);
+      busy = false;
+      await loadQueue();
+    }
+  });
+
+  async function advanceTicket(selected) {
+    if (busy || !staffEmail || (!selected && callNext.disabled)) return;
+    showQueueAlert();
+    const expectedStatus = selected ? selected.Status : "Waiting";
+    const transition = transitions[expectedStatus];
+    const selectedDepartment = selected ? selected.Department : department.value;
+    const selectedId = selected ? Number(selected.Id) : null;
+    if (!transition || (selected && (!Number.isSafeInteger(selectedId) || selectedId < 1))) return;
+    const reportingLocation = callLocation.value.trim();
+    if (expectedStatus === "Waiting" && (!reportingLocation || reportingLocation.toLowerCase() === "undefined")) {
+      callResult.textContent = "Select a reporting location before calling a ticket.";
+        showQueueAlert(callResult.textContent);
+        callResult.textContent = "";
+      callLocation.focus();
+      return;
+    }
+    busy = true;
+    updateControls();
+    callResult.textContent = selected ? "Checking ticket #" + selectedId + "…" : "Checking the oldest Waiting ticket…";
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 20000);
     let updateStarted = false;
     try {
       const url = new URL(itemsUrl);
       url.searchParams.set("$select", "Id,Title,Department,Status,JoinedAt,FirstCalledAt,CallCount");
-      url.searchParams.set("$filter", "Status eq 'Waiting' and Department eq '" + selectedDepartment + "'");
-      url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
-      url.searchParams.set("$top", "1");
-      const page = await readJson(url.href, controller.signal);
-      if (!Array.isArray(page.results)) throw new Error("Unexpected SharePoint queue response.");
-      const ticket = page.results[0];
+      let ticket;
+      if (selected) {
+        const itemUrl = new URL(itemsUrl.href + "(" + selectedId + ")");
+        itemUrl.search = url.search;
+        ticket = await readJson(itemUrl.href, controller.signal);
+      } else {
+        url.searchParams.set("$filter", "Status eq 'Waiting' and Department eq '" + selectedDepartment.replace(/'/g, "''") + "'");
+        url.searchParams.set("$orderby", "JoinedAt asc,Id asc");
+        url.searchParams.set("$top", "1");
+        const page = await readJson(url.href, controller.signal);
+        if (!Array.isArray(page.results)) throw new Error("Unexpected SharePoint queue response.");
+        ticket = page.results[0];
+      }
       if (!ticket) {
         callResult.textContent = "No Waiting tickets in " + selectedDepartment + ".";
+        showQueueAlert(callResult.textContent);
+        callResult.textContent = "";
         return;
       }
 
       const etag = ticket.__metadata?.etag;
       const id = Number(ticket.Id);
       if (!etag || etag === "*" || !Number.isSafeInteger(id) || id < 1 ||
-          ticket.Department !== selectedDepartment || ticket.Status !== "Waiting") {
-        throw new Error("SharePoint did not provide a valid Waiting ticket version.");
+          (selected && id !== selectedId) || ticket.Department !== selectedDepartment || ticket.Status !== expectedStatus) {
+        throw new Error("The ticket changed or its version could not be verified. Check the refreshed queue.");
       }
       const context = await readJson(site + "/_api/contextinfo", controller.signal, "POST");
       const digest = context.GetContextWebInformation?.FormDigestValue;
@@ -5049,37 +4627,60 @@
 
       const now = new Date().toISOString();
       updateStarted = true;
-      const result = await fetch(itemsUrl.href + "(" + id + ")", {
-        method: "POST",
-        credentials: "include",
-        signal: controller.signal,
-        headers: {
-          Accept: "application/json;odata=verbose",
-          "Content-Type": "application/json;odata=nometadata",
-          "X-RequestDigest": digest,
-          "X-HTTP-Method": "MERGE",
-          "IF-MATCH": etag
-        },
-        body: JSON.stringify({
-          Status: "Called",
+      const ticketUrl = itemsUrl.href + "(" + id + ")";
+      const result = await mergeTicket(ticketUrl, digest, etag, expectedStatus === "Waiting" ? {
+          Status: transition.status,
           FirstCalledAt: ticket.FirstCalledAt || now,
           LastCalledAt: now,
-          CalledLocation: location,
+          CalledLocation: reportingLocation,
           CallCount: (Number(ticket.CallCount) || 0) + 1,
           NotificationStatus: "Pending"
-        })
-      });
+        } : {
+          Status: transition.status,
+          [transition.timestamp]: now,
+          ...(expectedStatus === "Called" ? { ServiceProvidedBy: staffEmail } : {})
+        }, controller.signal);
       if (result.status === 412) {
         callResult.textContent = "Another update changed this ticket. Check the refreshed queue before calling again.";
+        showQueueAlert(callResult.textContent);
+        callResult.textContent = "";
       } else if (result.status === 204) {
-        callResult.textContent = (ticket.Title || "#" + id) + " called to " + location + ". Email status: Pending.";
+        const reference = ticket.Title || "#" + id;
+        if (expectedStatus !== "Waiting") {
+          callResult.textContent = reference + " moved to " + transition.status + ".";
+          return;
+        }
+        try {
+          const saved = await readJson(ticketUrl + "?$select=CalledLocation", controller.signal);
+          if (saved.CalledLocation === reportingLocation) {
+            callResult.textContent = reference + " called. Report to " + reportingLocation + ".";
+          } else {
+            showQueueAlert(reference + " called, but SharePoint did not return the expected reporting location. Check CalledLocation and version history.");
+            callResult.textContent = "";
+          }
+        } catch {
+          callResult.textContent = reference + " called. Could not verify the saved reporting location in SharePoint.";
+        showQueueAlert(callResult.textContent);
+        callResult.textContent = "";
+        }
       } else {
-        callResult.textContent = "SharePoint did not confirm the call (HTTP " + result.status + "). Check the ticket before trying again.";
+        let detail = "";
+        if ((result.headers.get("content-type") || "").includes("json")) {
+          const payload = await result.json().catch(() => null);
+          const message = payload?.error?.message || payload?.["odata.error"]?.message;
+          detail = typeof message === "string" ? message : message?.value || "";
+        }
+        callResult.textContent = "SharePoint rejected the update (HTTP " + result.status + ")." +
+          (detail ? " " + detail : " Check the ticket before trying again.");
+        showQueueAlert(callResult.textContent);
+        callResult.textContent = "";
       }
     } catch (error) {
       callResult.textContent = updateStarted
-        ? "The call result is uncertain. Check the ticket in SharePoint before trying again."
+        ? "The update result is uncertain. Check the ticket in SharePoint before trying again."
         : error.message;
+      showQueueAlert(callResult.textContent);
+      callResult.textContent = "";
     } finally {
       clearTimeout(timeout);
       busy = false;
@@ -5087,12 +4688,24 @@
     }
   }
 
-  refresh.addEventListener("click", loadQueue);
-  department.addEventListener("change", () => { render(); updateControls(); });
-  callLocation.addEventListener("input", updateControls);
-  callNext.addEventListener("click", claimNextTicket);
+  renderReportingRooms();
+  document.getElementById("navConfigBtn").addEventListener("click", loadReportingRooms);
+  refresh.addEventListener("click", () => { showQueueAlert(); loadQueue(); });
+  department.addEventListener("change", () => { dismissClearQueue(); render(); updateControls(); });
+  callLocation.addEventListener("change", updateControls);
+  callNext.addEventListener("click", () => advanceTicket());
   status.textContent = "Dashboard script ready. Select Refresh tickets to check SharePoint.";
-  if (location.protocol !== "file:") loadQueue();
+  function openStaffQueue() {
+    showQueueAlert();
+    loadReportingRooms();
+    loadQueue();
+  }
+
+  const staffTab = document.getElementById("navStaffBtn");
+  staffTab.addEventListener("click", openStaffQueue);
+  window.addEventListener("DOMContentLoaded", () => {
+    if (!document.getElementById("liveQueueView").hidden) openStaffQueue();
+  });
 })();
 </script>
 <!-- <script src="testRecorder.js"></script> -->
